@@ -51,9 +51,9 @@
     <Compile Include="RunOptions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Orchestra.Common\Orchestra.Common.csproj">
+    <ProjectReference Include="..\Orchestra.PluginManager.Common\Orchestra.PluginManager.Common.csproj">
       <Project>{e3b71fc7-33bc-4a92-bba4-9d9b05034706}</Project>
-      <Name>Orchestra.Common</Name>
+      <Name>Orchestra.PluginManager.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

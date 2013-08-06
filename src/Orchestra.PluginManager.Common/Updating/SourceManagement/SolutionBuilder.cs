@@ -1,8 +1,7 @@
-﻿namespace Orchestra.Modules.PluginManager.Helpers
+﻿namespace Orchestra.PluginManager.Common.Updating.SourceManagement
 {
     using System.Collections.Generic;
     using System.IO;
-
     using Microsoft.Build.Evaluation;
     using Microsoft.Build.Execution;
     using Microsoft.Build.Framework;

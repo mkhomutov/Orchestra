@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Orchestra.Common
+﻿namespace Orchestra.PluginManager.Common.Isolation
 {
+    using System;
     using System.Runtime.InteropServices;
 
     public static class Win32
