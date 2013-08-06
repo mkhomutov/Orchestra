@@ -133,7 +133,9 @@
     <Compile Include="Models\RibbonItem.cs" />
     <Compile Include="Models\RibbonSplitButton.cs" />
     <Compile Include="Models\RibbonToolTip.cs" />
+    <Compile Include="Modules\IsolatableModule.cs" />
     <Compile Include="Modules\ModuleBase.cs" />
+    <Compile Include="Modules\UpdatableModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Interfaces\IOrchestraService.cs" />
     <Compile Include="Models\Interface\IRibbonControl.cs" />
