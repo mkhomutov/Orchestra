@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ModuleRepository.cs" company="Orchestra development team">
+//   Copyright (c) 2008 - 2012 Orchestra development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Orchestra.RepositoryManagement
 {
     using Interfaces;
+    using System;
 
     public class ModuleRepository
     {
         private readonly RepositoryConnectionInfo _connectionInfo;
         private readonly IRepositoryService _repositoryService;
 
-      //  public DateTime? DateModified { get; }
 
         public ModuleRepository(RepositoryConnectionInfo connectionInfo, IRepositoryService repositoryService)
         {
@@ -21,23 +21,9 @@ namespace Orchestra.RepositoryManagement
             _repositoryService = repositoryService;
         }
 
-       /* public void Update()
+        public void Update()
         {
-            if (true)
-            {
-                _repositoryService.Clone(_connectionInfo);
-            }
-            else
-            {
-                if (true)
-                {
-                    _repositoryService.Update(_connectionInfo);
-                }
-                else
-                {
-                    _repositoryService.GetLastCommitDate(_connectionInfo);
-                }
-            }
-        }*/
+            throw new NotImplementedException();
+        }
     }
 }

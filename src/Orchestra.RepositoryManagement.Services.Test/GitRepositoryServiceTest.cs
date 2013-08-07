@@ -1,4 +1,10 @@
-﻿namespace Orchestra.RepositoryManagement.Services.Test
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="GitRepositoryServiceTest.cs" company="Orchestra development team">
+//   Copyright (c) 2008 - 2012 Orchestra development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Orchestra.RepositoryManagement.Services.Test
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

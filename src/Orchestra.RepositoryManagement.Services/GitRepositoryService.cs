@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="GitRepositoryService.cs" company="Orchestra development team">
+//   Copyright (c) 2008 - 2012 Orchestra development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Orchestra.RepositoryManagement.Services
 {
@@ -11,6 +11,8 @@ namespace Orchestra.RepositoryManagement.Services
     using NGit.Errors;
     using NGit.Storage.File;
     using Sharpen;
+    using System.Linq;
+    using System;
 
     /// <summary>
     /// this class allow you to manage git - repository load
