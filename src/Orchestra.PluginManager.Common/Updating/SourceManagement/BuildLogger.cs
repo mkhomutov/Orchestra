@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Orchestra.Modules.PluginManager.Helpers
+﻿namespace Orchestra.PluginManager.Common.Updating.SourceManagement
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
     using Microsoft.Build.Framework;
     using Microsoft.Build.Utilities;
 
