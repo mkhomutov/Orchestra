@@ -50,8 +50,18 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="GitRepositoryServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Orchestra.RepositoryManagement.Services\Orchestra.RepositoryManagement.Services.csproj">
+      <Project>{1e90f43a-8a69-472e-8795-40154f6b795e}</Project>
+      <Name>Orchestra.RepositoryManagement.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchestra.RepositoryManagement\Orchestra.RepositoryManagement.csproj">
+      <Project>{b775f9d1-1132-4c50-b411-d0771550b5d6}</Project>
+      <Name>Orchestra.RepositoryManagement</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
