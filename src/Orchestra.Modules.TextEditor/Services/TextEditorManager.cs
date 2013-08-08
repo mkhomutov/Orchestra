@@ -17,7 +17,8 @@ namespace Orchestra.Modules.TextEditor.Services
 
     internal class TextEditorManager : ServiceBase, ITextEditorManager
     {
-        private IList<IHighlightingDefinition> hilighnings = new List<IHighlightingDefinition>();
+        private IDictionary<string, IHighlightingDefinition> hilighnings = new Dictionary<string, IHighlightingDefinition>();
+        private IDictionary<Guid, TextEditorViewModel> editors = new Dictionary<Guid, TextEditorViewModel>();
 
         public void AddHighlightingSchema(string name, string[] extensions, string schema)
         {
@@ -26,14 +27,24 @@ namespace Orchestra.Modules.TextEditor.Services
             {
                 var xshd = HighlightingLoader.LoadXshd(reader);
                 var hilightning = HighlightingLoader.Load(xshd, new HighlightingManager());
-                hilighnings.Add(hilightning);
+                hilighnings.Add(name, hilightning);
             }
         }
 
-        public void ShowEditor()
+        public void SetHighlightingByName(Guid editorId, string name)
         {
+            editors[editorId].CurrentHighlighting = hilighnings[name];
+        }
+
+        public Guid ShowEditor()
+        {            
             var orchestraService = GetService<IOrchestraService>();
-            orchestraService.ShowDocument<TextEditorViewModel>();
+            var textEditor = new TextEditorViewModel();
+            var id = Guid.NewGuid();
+            editors.Add(id, textEditor);
+            orchestraService.ShowDocument(textEditor);
+
+            return id;
         }
     }
 }

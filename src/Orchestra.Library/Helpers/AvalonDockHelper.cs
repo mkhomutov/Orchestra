@@ -70,7 +70,7 @@ namespace Orchestra
         {
             Argument.IsNotNull("viewType", viewType);
 
-            return (from document in LayoutDocumentPane.Children where document is LayoutDocument && document.Content.GetType() == viewType && TagHelper.AreTagsEqual(tag, ((IView) document.Content).Tag) select document).Cast<LayoutDocument>().FirstOrDefault();
+            return (from document in LayoutDocumentPane.Children where document is LayoutDocument && document.Content.GetType() == viewType && TagHelper.AreTagsEqual(tag, ((IView)document.Content).Tag) select document).Cast<LayoutDocument>().FirstOrDefault();
         }
 
         /// <summary>

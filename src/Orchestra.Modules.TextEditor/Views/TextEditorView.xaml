@@ -1,4 +1,4 @@
-﻿<orchestra:DocumentView x:Class="Orchestra.Modules.JuliaEditor.Views.TextEditorView"
+﻿<orchestra:DocumentView x:Class="Orchestra.Modules.TextEditor.Views.TextEditorView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                         xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
@@ -10,7 +10,7 @@
     <DockPanel LastChildFill="True">
         <avalonEdit:TextEditor 
             x:Name="editor"
-            SyntaxHighlighting="C#">
+            SyntaxHighlighting="{Binding CurrentHighlighting}">
             
         </avalonEdit:TextEditor>
     </DockPanel>

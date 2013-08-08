@@ -1,14 +1,7 @@
-﻿namespace Orchestra.Modules.JuliaEditor
+﻿namespace Orchestra.Modules.TextEditor
 {
-    using Catel.IoC;
-    using Catel.MVVM;
-    using Catel.MVVM.Services;
-    using Orchestra.Models;
-    using Orchestra.Modules;
     using Orchestra.Modules.TextEditor.Services;
     using Orchestra.Modules.TextEditor.Services.Interfaces;
-    using Orchestra.Modules.TextEditor.ViewModels;
-    using Orchestra.Services;
 
     /// <summary>
     /// The module.

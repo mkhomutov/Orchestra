@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Orchestra.Modules.JuliaEditor.Helpers
+﻿namespace Orchestra.Modules.TextEditor.Helpers
 {
+    using System;
+    using System.Collections.Generic;
+
     using ICSharpCode.AvalonEdit.Highlighting;
-    using ICSharpCode.AvalonEdit.Highlighting.Xshd;
 
     public class HighlightingHelper : IHighlightingDefinition
     {

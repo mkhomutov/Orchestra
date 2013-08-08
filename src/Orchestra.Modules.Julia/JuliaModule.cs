@@ -53,7 +53,8 @@
         {
             var textEditor = (ITextEditorManager)Catel.IoC.ServiceLocator.Default.GetService(typeof(ITextEditorManager));
             textEditor.AddHighlightingSchema("Julia", new [] { "*.jl" }, Properties.Resources.JuliaLang);
-            textEditor.ShowEditor();
+            var id = textEditor.ShowEditor();
+            textEditor.SetHighlightingByName(id, "Julia");
         }
     }
 }
