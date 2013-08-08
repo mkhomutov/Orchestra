@@ -37,7 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Catel.Core">
-      <HintPath>..\..\packages\Catel.Core.3.6.1308060814-beta\lib\net40\Catel.Core.dll</HintPath>
+      <HintPath>..\..\packages\Catel.Core.3.6.1307311839-beta\lib\net40\Catel.Core.dll</HintPath>
     </Reference>
     <Reference Include="Catel.Extensions.Controls">
       <HintPath>..\..\packages\Catel.Extensions.Controls.3.6.1307311839-beta\lib\net40\Catel.Extensions.Controls.dll</HintPath>
@@ -47,7 +47,7 @@
       <HintPath>..\..\packages\Catel.Extensions.Prism.3.6.1307311839-beta\lib\net40\Catel.Extensions.Prism.dll</HintPath>
     </Reference>
     <Reference Include="Catel.MVVM">
-      <HintPath>..\..\packages\Catel.MVVM.3.6.1308060814-beta\lib\net40\Catel.MVVM.dll</HintPath>
+      <HintPath>..\..\packages\Catel.MVVM.3.6.1307311839-beta\lib\net40\Catel.MVVM.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.AvalonEdit">
       <HintPath>..\..\packages\AvalonEdit.4.3.1.9430\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
