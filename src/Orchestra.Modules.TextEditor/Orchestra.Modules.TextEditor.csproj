@@ -95,13 +95,19 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\HighlightingHelper.cs" />
-    <Compile Include="Services\Interfaces\ITextEditorManager.cs" />
-    <Compile Include="Services\TextEditorManager.cs" />
+    <Compile Include="Exceptions\HighlightingDefinitionDuplicatedException.cs" />
+    <Compile Include="Helpers\ConfigurationApplier.cs" />
+    <Compile Include="Models\Document.cs" />
+    <Compile Include="Services\Interfaces\IDocumentService.cs" />
+    <Compile Include="Services\Interfaces\ITextEditorService.cs" />
+    <Compile Include="Services\TextEditorService.cs" />
+    <Compile Include="TextEditorConfiguration.cs" />
+    <Compile Include="TextEditorConfigurationBuilder.cs" />
     <Compile Include="TextEditorModule.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModels\TextEditorViewModel.cs" />
+    <Compile Include="Views\Interfaces\ITextEditorView.cs" />
     <Compile Include="Views\TextEditorView.xaml.cs">
       <DependentUpon>TextEditorView.xaml</DependentUpon>
     </Compile>
@@ -112,9 +118,7 @@
     </Compile>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Fody.targets" />
     <None Include="packages.config" />

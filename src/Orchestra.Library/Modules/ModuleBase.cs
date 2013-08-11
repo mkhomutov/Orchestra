@@ -8,6 +8,7 @@ namespace Orchestra.Modules
 {
     using System;
     using Microsoft.Practices.Prism.Modularity;
+    using Orchestra.Messages;
     using Services;
 
     /// <summary>
@@ -58,6 +59,15 @@ namespace Orchestra.Modules
         protected virtual void InitializeRibbon(IRibbonService ribbonService)
         {
             
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        protected override void OnInitialized()
+        {
+            Catel.Messaging.MessageMediator.Default.SendMessage(new ModuleInitialized(ModuleName));
+            base.OnInitialized();
         }
     }
 }

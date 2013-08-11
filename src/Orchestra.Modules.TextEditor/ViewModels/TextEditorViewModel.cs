@@ -1,7 +1,7 @@
 ﻿namespace Orchestra.Modules.TextEditor.ViewModels
 {
     using ICSharpCode.AvalonEdit.Highlighting;
-
+    using Orchestra.Modules.TextEditor.Models;
     using Orchestra.Modules.TextEditor.Services;
     using Orchestra.Modules.TextEditor.Services.Interfaces;
 
@@ -18,8 +18,8 @@
         {
             
         }
-        #endregion
+        #endregion        
 
-        public IHighlightingDefinition CurrentHighlighting { get; set; }
+        public Document Document { get; set; }
     }
 }

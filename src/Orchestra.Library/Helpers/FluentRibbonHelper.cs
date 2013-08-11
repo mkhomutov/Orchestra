@@ -90,6 +90,7 @@ namespace Orchestra
             return tabGroup;
         }
 
+       
         /// <summary>
         /// Ensures that a tab item with the specified header exists.
         /// </summary>

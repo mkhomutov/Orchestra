@@ -54,9 +54,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Catel.MVVM.3.6.1307311839-beta\lib\net40\Catel.MVVM.dll</HintPath>
     </Reference>
-    <Reference Include="Fluent, Version=2.0.0.0, Culture=neutral, PublicKeyToken=3e436e32a8c5546f, processorArchitecture=MSIL">
+    <Reference Include="Fluent, Version=2.1.0.0, Culture=neutral, PublicKeyToken=3e436e32a8c5546f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\Fluent\Fluent.dll</HintPath>
+      <HintPath>..\..\packages\Fluent.Ribbon.2.0.2\lib\net40\Fluent.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -85,7 +85,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Prism.4.1.0.0\lib\NET40\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\..\packages\Fluent.Ribbon.2.0.2\lib\net40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
@@ -121,6 +121,7 @@
     <Compile Include="Controls\BindableLayoutDocument.cs" />
     <Compile Include="Helpers\AvalonDockHelper.cs" />
     <Compile Include="Helpers\FluentRibbonHelper.cs" />
+    <Compile Include="Messages\ModuleInitialized.cs" />
     <Compile Include="Models\Interface\IRibbonButton.cs" />
     <Compile Include="Models\Interface\IRibbonComboBox.cs" />
     <Compile Include="Models\Interface\IRibbonGallery.cs" />

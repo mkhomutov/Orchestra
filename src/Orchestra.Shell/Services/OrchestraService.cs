@@ -10,6 +10,7 @@ namespace Orchestra.Services
     using Catel;
     using Catel.Logging;
     using Catel.MVVM;
+    using Catel.Windows.Controls;
     using Catel.Windows.Threading;
 
     using Orchestra.Models;
@@ -122,6 +123,24 @@ namespace Orchestra.Services
 
             Log.Debug("Showed document for view model '{0}'", viewModel.UniqueIdentifier);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool IsActive<TViewModel>(object tag = null) where TViewModel : IViewModel
+        {
+            var viewLocator = GetService<IViewLocator>();
+            var viewType = viewLocator.ResolveView(typeof(TViewModel));
+
+            var activeDocument = AvalonDockHelper.GetActiveDocument();
+            var view = (IView)activeDocument.Content;
+
+            var contentType = view.GetType();
+
+            return (tag == null && viewType == contentType) || (viewType == contentType && Equals(view.Tag, tag));
+        }
+
 
         /// <summary>
         /// Closes the document in the main shell with the specified view model.

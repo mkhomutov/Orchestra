@@ -86,6 +86,15 @@ namespace Orchestra
         }
 
         /// <summary>
+        /// Gets currently activated document in the docking manager.
+        /// </summary>
+        /// <returns>The active document.</returns>
+        public static LayoutDocument GetActiveDocument()
+        {
+            return LayoutDocumentPane.Children[LayoutDocumentPane.SelectedContentIndex] as LayoutDocument;
+        }
+
+        /// <summary>
         /// Creates the document.
         /// </summary>
         /// <param name="view">The view.</param>
@@ -112,7 +121,7 @@ namespace Orchestra
         /// <exception cref="ArgumentNullException">The <paramref name="view" /> is <c>null</c>.</exception>
         private static LayoutDocument WrapViewInLayoutDocument(FrameworkElement view, object tag = null)
         {
-            return new BindableLayoutDocument(view);
+            return new BindableLayoutDocument(view, tag);
         }
 
         /// <summary>

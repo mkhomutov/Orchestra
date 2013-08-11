@@ -19,7 +19,5 @@ namespace Orchestra.Modules
             : base(moduleName)
         {
         }
-
-        //public 
     }
 }
