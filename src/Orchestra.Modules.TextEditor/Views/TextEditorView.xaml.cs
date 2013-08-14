@@ -1,4 +1,11 @@
-﻿namespace Orchestra.Modules.TextEditor.Views
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TextEditorView.xaml.cs" company="Orchestra development team">
+//   Copyright (c) 2008 - 2013 Orchestra development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
+
+namespace Orchestra.Modules.TextEditor.Views
 {
     using Orchestra.Modules.TextEditor.Views.Interfaces;
     using Orchestra.Views;
@@ -8,13 +15,14 @@
     /// </summary>
     public partial class TextEditorView : DocumentView, ITextEditorView
     {
+        #region Constructors
         /// <summary>
-        /// Initializes a new instance of the <see cref="TextEditorView"/> class.
+        /// Initializes a new instance of the <see cref="TextEditorView" /> class.
         /// </summary>
         public TextEditorView()
-        {            
-            this.InitializeComponent();
+        {
+            InitializeComponent();
         }
-
+        #endregion
     }
 }

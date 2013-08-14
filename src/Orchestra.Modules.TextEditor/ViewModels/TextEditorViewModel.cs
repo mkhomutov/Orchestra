@@ -1,25 +1,22 @@
-﻿namespace Orchestra.Modules.TextEditor.ViewModels
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TextEditorViewModel.cs" company="Orchestra development team">
+//   Copyright (c) 2008 - 2013 Orchestra development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
+
+namespace Orchestra.Modules.TextEditor.ViewModels
 {
-    using ICSharpCode.AvalonEdit.Highlighting;
     using Orchestra.Modules.TextEditor.Models;
-    using Orchestra.Modules.TextEditor.Services;
-    using Orchestra.Modules.TextEditor.Services.Interfaces;
+    using Orchestra.ViewModels;
 
     /// <summary>
     /// JuliaLangEditor view model
     /// </summary>
-    class TextEditorViewModel : Orchestra.ViewModels.ViewModelBase
+    internal class TextEditorViewModel : ViewModelBase
     {
-        #region Constructors
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TextEditorViewModel"/> class.
-        /// </summary>
-        public TextEditorViewModel()
-        {
-            
-        }
-        #endregion        
-
+        #region Properties
         public Document Document { get; set; }
+        #endregion
     }
 }

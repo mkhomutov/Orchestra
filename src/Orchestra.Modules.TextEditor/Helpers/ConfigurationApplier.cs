@@ -1,7 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ConfigurationApplier.cs" company="Orchestra development team">
+//   Copyright (c) 2008 - 2013 Orchestra development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
 
 namespace Orchestra.Modules.TextEditor.Helpers
 {
@@ -9,10 +11,12 @@ namespace Orchestra.Modules.TextEditor.Helpers
 
     internal static class ConfigurationApplier
     {
+        #region Methods
         public static void ApplyConfiguration(this Document document, TextEditorConfiguration configuration)
         {
             /// TODO: Highlighting must detected by document properties
-            document.CurrentHighlighting = configuration.GetHighlighting(configuration.ConfigurationName);
+            document.CurrentHighlighting = configuration.GetHighlighting(configuration.Name);
         }
+        #endregion
     }
 }

@@ -95,17 +95,19 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\DefaultFileNameDefinitionDuplicatedExtension.cs" />
     <Compile Include="Exceptions\HighlightingDefinitionDuplicatedException.cs" />
+    <Compile Include="Exceptions\TextEditorConfigurationException.cs" />
+    <Compile Include="Exceptions\TextEditorException.cs" />
     <Compile Include="Helpers\ConfigurationApplier.cs" />
     <Compile Include="Models\Document.cs" />
+    <Compile Include="Services\DocumentService.cs" />
     <Compile Include="Services\Interfaces\IDocumentService.cs" />
     <Compile Include="Services\Interfaces\ITextEditorService.cs" />
     <Compile Include="Services\TextEditorService.cs" />
     <Compile Include="TextEditorConfiguration.cs" />
     <Compile Include="TextEditorConfigurationBuilder.cs" />
-    <Compile Include="TextEditorModule.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="TextEditorModule.cs" />
     <Compile Include="ViewModels\TextEditorViewModel.cs" />
     <Compile Include="Views\Interfaces\ITextEditorView.cs" />
     <Compile Include="Views\TextEditorView.xaml.cs">

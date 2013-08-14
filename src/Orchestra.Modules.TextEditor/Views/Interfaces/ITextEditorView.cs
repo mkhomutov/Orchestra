@@ -1,7 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ITextEditorView.cs" company="Orchestra development team">
+//   Copyright (c) 2008 - 2013 Orchestra development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
 
 namespace Orchestra.Modules.TextEditor.Views.Interfaces
 {
@@ -9,6 +11,5 @@ namespace Orchestra.Modules.TextEditor.Views.Interfaces
 
     public interface ITextEditorView : IDocumentView
     {
-        
     }
 }

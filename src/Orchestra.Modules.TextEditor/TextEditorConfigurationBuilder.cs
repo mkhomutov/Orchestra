@@ -1,7 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TextEditorConfigurationBuilder.cs" company="Orchestra development team">
+//   Copyright (c) 2008 - 2013 Orchestra development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
 
 namespace Orchestra.Modules.TextEditor
 {
@@ -10,34 +12,49 @@ namespace Orchestra.Modules.TextEditor
     using ICSharpCode.AvalonEdit.Highlighting;
     using ICSharpCode.AvalonEdit.Highlighting.Xshd;
 
+    using Orchestra.Modules.TextEditor.Services.Interfaces;
+
     public class TextEditorConfigurationBuilder
     {
-        private readonly TextEditorModule _module;
-
+        #region Fields
         private readonly TextEditorConfiguration _configuration;
+        private readonly TextEditorModule _module;
+        #endregion
 
+        #region Constructors
         public TextEditorConfigurationBuilder(TextEditorModule module, string configName)
         {
             _module = module;
             _configuration = new TextEditorConfiguration(configName);
         }
+        #endregion
 
+        #region Methods
         public TextEditorConfigurationBuilder AddHighlightingSchema(string name, string schema)
         {
             using (var strRead = new StringReader(schema))
-            using (var reader = XmlReader.Create(strRead))
             {
-                var xshd = HighlightingLoader.LoadXshd(reader);
-                var hilightning = HighlightingLoader.Load(xshd, new HighlightingManager());
-                _configuration.AddHighlighting(name, hilightning);
+                using (var reader = XmlReader.Create(strRead))
+                {
+                    var xshd = HighlightingLoader.LoadXshd(reader);
+                    var hilightning = HighlightingLoader.Load(xshd, new HighlightingManager());
+                    _configuration.AddHighlighting(name, hilightning);
+                }
             }
 
             return this;
         }
 
-        public void Configure()
+        public TextEditorConfigurationBuilder AddDefaultFileNameDefinition(string fileName)
         {
-            _module.UpdateConfiguration(_configuration);
+            _configuration.AddDefaultFileName(fileName);
+            return this;
         }
+
+        public TextEditorConfiguration Build()
+        {            
+            return _configuration;            
+        }
+        #endregion
     }
 }

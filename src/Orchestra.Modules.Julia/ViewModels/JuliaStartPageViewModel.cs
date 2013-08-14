@@ -1,15 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="JuliaStartPageViewModel.cs" company="Orchestra development team">
+//   Copyright (c) 2008 - 2013 Orchestra development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
 
 namespace Orchestra.Modules.Julia.ViewModels
 {
-    public sealed class JuliaStartPageViewModel : Orchestra.ViewModels.ViewModelBase
+    using Orchestra.ViewModels;
+
+    public sealed class JuliaStartPageViewModel : ViewModelBase
     {
+        #region Constructors
         public JuliaStartPageViewModel()
         {
             Title = "Julia start page";
         }
+        #endregion
     }
 }

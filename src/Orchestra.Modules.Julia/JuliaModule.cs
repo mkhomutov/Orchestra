@@ -1,55 +1,57 @@
-﻿namespace Orchestra.Modules.Julia
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="JuliaModule.cs" company="Orchestra development team">
+//   Copyright (c) 2008 - 2013 Orchestra development team. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
+
+namespace Orchestra.Modules.Julia
 {
+    using System;
+    using Catel.IoC;
     using Catel.MVVM;
-    using Catel.MVVM.Services;
+    using Catel.Messaging;
     using Orchestra.Messages;
     using Orchestra.Models;
-    using Orchestra.Modules;
+    using Orchestra.Modules.Julia.Properties;
     using Orchestra.Modules.Julia.ViewModels;
     using Orchestra.Modules.Julia.Views.Interfaces;
-    using Orchestra.Modules.TextEditor.Services;
+    using Orchestra.Modules.TextEditor.Models;
     using Orchestra.Modules.TextEditor.Services.Interfaces;
-    using Orchestra.Modules.TextEditor.Views;
     using Orchestra.Modules.TextEditor.Views.Interfaces;
     using Orchestra.Services;
-    using Orchestra.Views;
 
     /// <summary>
     /// The module.
     /// </summary>
-    public class JuliaModule : Orchestra.Modules.ModuleBase
+    public class JuliaModule : ModuleBase
     {
+        #region Constants
         private const string ConfigurationName = "Julia";
+        #endregion
 
+        #region Constructors
         /// <summary>
         /// Initializes the module.
         /// </summary>
         public JuliaModule()
             : base("JuliaModule")
         {
-            Catel.Messaging.MessageMediator.Default.Register<ModuleInitialized>(this, OnModuleLoaded);
+            MessageMediator.Default.Register<ModuleInitialized>(this, OnModuleInitialized);
         }
+        #endregion
 
+        #region Methods
         /// <summary>
         /// Called when the module is initialized.
         /// </summary>
         protected override void OnInitialized()
         {
-            var orchestraService = GetService<IOrchestraService>();
-
-            // TODO: Register ribbon items
-            //var openRibbonItem = new RibbonItem(ModuleName, ModuleName, "Action name", new Command(() =>
-            //    {
-            //        // Action to invoke
-            //    }));
-            //orchestraService.AddRibbonItem(openRibbonItem);
-
-            // TODO: Handle additional initialization code
         }
 
         /// <summary>
         /// Initializes the ribbon.
-        /// <para />
+        ///     <para />
         /// Use this method to hook up views to ribbon items.
         /// </summary>
         /// <param name="ribbonService">The ribbon service.</param>
@@ -58,19 +60,20 @@
             const string juliaTabName = "Julia";
             ribbonService.RegisterRibbonItem(new RibbonButton(HomeRibbonTabName, ModuleName, "Julia", new Command(OnShowJuliaStartPage)));
 
-            ribbonService.RegisterContextualRibbonItem<IJuliaStartPageView>(new RibbonButton(juliaTabName, "File", "New", new Command(OnNew, CanCreateNew)) { ItemImage = "/Orchestra.Library;component/Resources/Images/FileOpen.png" }, juliaTabName);
+            ribbonService.RegisterContextualRibbonItem<IJuliaStartPageView>(new RibbonButton(juliaTabName, "File", "New", new Command(OnNew, CanCreateNew)) {ItemImage = "/Orchestra.Library;component/Resources/Images/FileOpen.png"}, juliaTabName);
 
-            ribbonService.RegisterContextualRibbonItem<IJuliaStartPageView>(new RibbonButton(juliaTabName, "File", "Open", new Command(OnOpen, CanOpen)) { ItemImage = "/Orchestra.Library;component/Resources/Images/FileOpen.png" }, juliaTabName);
+            ribbonService.RegisterContextualRibbonItem<IJuliaStartPageView>(new RibbonButton(juliaTabName, "File", "Open", new Command(OnOpen, CanOpen)) {ItemImage = "/Orchestra.Library;component/Resources/Images/FileOpen.png"}, juliaTabName);
 
-            ribbonService.RegisterContextualRibbonItem<ITextEditorView>(new RibbonButton(juliaTabName, "File", "Save", new Command(OnSave, CanSave)) { ItemImage = "/Orchestra.Library;component/Resources/Images/FileSave.png" },
-                juliaTabName);
+            ribbonService.RegisterContextualRibbonItem<ITextEditorView>(new RibbonButton(juliaTabName, "File", "Save", new Command(OnSave, CanSave)) {ItemImage = "/Orchestra.Library;component/Resources/Images/FileSave.png"},
+                                                                        juliaTabName);
 
-            ribbonService.RegisterContextualRibbonItem<ITextEditorView>(new RibbonButton(juliaTabName, "File", "Save as ...", new Command(OnSaveAs, CanSaveAs)) { ItemImage = "/Orchestra.Library;component/Resources/Images/FileSave.png" },
-                juliaTabName);
+            ribbonService.RegisterContextualRibbonItem<ITextEditorView>(new RibbonButton(juliaTabName, "File", "Save as ...", new Command(OnSaveAs, CanSaveAs)) {ItemImage = "/Orchestra.Library;component/Resources/Images/FileSave.png"},
+                                                                        juliaTabName);
         }
 
-        private void OnModuleLoaded(ModuleInitialized msg)
+        private void OnModuleInitialized(ModuleInitialized msg)
         {
+            // TODO: somehow extract TextEditorModule.Name. May be create static method GetModuleName
             if (msg.ModuleName != "TextEditorModule")
             {
                 return;
@@ -79,29 +82,32 @@
             ConfigureTextEditor();
         }
 
-        private void ConfigureTextEditor()
+        private static void ConfigureTextEditor()
         {
-            var textEditorService = (ITextEditorService)Catel.IoC.ServiceLocator.Default.ResolveType(typeof(ITextEditorService));
+            var textEditorService = (ITextEditorService) ServiceLocator.Default.ResolveType(typeof (ITextEditorService));
 
-            textEditorService.Configure(ConfigurationName)
-                             .AddHighlightingSchema(ConfigurationName, Properties.Resources.JuliaLang)
-                             .Configure();
+            var config = textEditorService.Configure(ConfigurationName).AddHighlightingSchema(ConfigurationName, Resources.JuliaLang).AddDefaultFileNameDefinition("NewFile.jl").Build();
+
+            textEditorService.ApplyConfiguration(config);
         }
 
-        private void OnNew()
+        private static void OnNew()
         {
-            var textEditorService = (ITextEditorService) Catel.IoC.ServiceLocator.Default.ResolveType(typeof (ITextEditorService));
-            textEditorService.CreateDocument(ConfigurationName);
+            var textEditorService = (ITextEditorService) ServiceLocator.Default.ResolveType(typeof (ITextEditorService));
+            var documentService = (IDocumentService)ServiceLocator.Default.ResolveType(typeof(IDocumentService));
+
+            var document = textEditorService.CreateDocument(ConfigurationName);            
+            documentService.GenerateAndApplyNewFileName(document, ".jl");
         }
 
-        private bool CanCreateNew()
+        private static bool CanCreateNew()
         {
             return true;
         }
 
         private void OnOpen()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private bool CanOpen()
@@ -111,29 +117,41 @@
 
         private void OnSave()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        private bool CanSave()
+        private static bool CanSave()
         {
-            if (!Catel.IoC.ServiceLocator.Default.AreAllTypesRegistered(typeof (ITextEditorService)))
+            if (!IsServiceRegistered<ITextEditorService>())
             {
                 return false;
             }
 
-            var textEditorService = (ITextEditorService)Catel.IoC.ServiceLocator.Default.ResolveType(typeof(ITextEditorService));
+            var textEditorService = (ITextEditorService) ServiceLocator.Default.ResolveType(typeof (ITextEditorService));
             var activeDocument = textEditorService.GetActiveDocument();
-            return activeDocument != null;
+            return activeDocument != null && activeDocument.Saved && activeDocument.Changed;
         }
 
         private void OnSaveAs()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        private bool CanSaveAs()
+        private static bool CanSaveAs()
         {
-            return false;
+            if (!IsServiceRegistered<ITextEditorService>())
+            {
+                return false;
+            }
+
+            var textEditorService = (ITextEditorService)ServiceLocator.Default.ResolveType(typeof(ITextEditorService));
+            var activeDocument = textEditorService.GetActiveDocument();
+            return activeDocument != null && (!activeDocument.Saved && !activeDocument.Changed);
+        }
+
+        private static bool IsServiceRegistered<T>()
+        {
+            return ServiceLocator.Default.AreAllTypesRegistered(typeof (T));
         }
 
         private void OnShowJuliaStartPage()
@@ -142,5 +160,6 @@
 
             orchestraService.ShowDocument<JuliaStartPageViewModel>();
         }
+        #endregion
     }
 }
