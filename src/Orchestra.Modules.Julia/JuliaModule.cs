@@ -86,7 +86,7 @@ namespace Orchestra.Modules.Julia
         {
             var textEditorService = (ITextEditorService) ServiceLocator.Default.ResolveType(typeof (ITextEditorService));
 
-            var config = textEditorService.Configure(ConfigurationName).AddHighlightingSchema(ConfigurationName, Resources.JuliaLang).AddDefaultFileNameDefinition("NewFile.jl").Build();
+            var config = textEditorService.Configure(ConfigurationName).AddDefaultFileNameDefinition("NewFile", ".jl").Build();
 
             textEditorService.ApplyConfiguration(config);
         }
@@ -96,7 +96,8 @@ namespace Orchestra.Modules.Julia
             var textEditorService = (ITextEditorService) ServiceLocator.Default.ResolveType(typeof (ITextEditorService));
             var documentService = (IDocumentService)ServiceLocator.Default.ResolveType(typeof(IDocumentService));
 
-            var document = textEditorService.CreateDocument(ConfigurationName);            
+            var document = textEditorService.CreateDocument(ConfigurationName);    
+            textEditorService.RegisterHighlighting(Properties.Resources.JuliaLang, ".jl");
             documentService.GenerateAndApplyNewFileName(document, ".jl");
         }
 

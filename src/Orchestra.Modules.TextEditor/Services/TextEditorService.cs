@@ -8,8 +8,14 @@
 namespace Orchestra.Modules.TextEditor.Services
 {
     using System;
+    using System.IO;
     using System.Linq;
+    using System.Xml;
+
     using Catel.IoC;
+
+    using ICSharpCode.AvalonEdit.Highlighting;
+    using ICSharpCode.AvalonEdit.Highlighting.Xshd;
 
     using Orchestra.Modules.TextEditor.Helpers;
     using Orchestra.Modules.TextEditor.Models;
@@ -54,13 +60,27 @@ namespace Orchestra.Modules.TextEditor.Services
                           .FirstOrDefault(orchestraService.IsActive<TextEditorViewModel>);
         }
 
+        public void RegisterHighlighting(string schema, params string[] extensions)
+        {
+            using (var strRead = new StringReader(schema))
+            {
+                using (var reader = XmlReader.Create(strRead))
+                {
+                    var xshd = HighlightingLoader.LoadXshd(reader);
+                    var hilightning = HighlightingLoader.Load(xshd, new HighlightingManager());
+
+                    HighlightingManager.Instance.RegisterHighlighting(hilightning.Name, extensions, hilightning);
+                }
+            }           
+        }
+
         public void ApplyConfiguration(TextEditorConfiguration confuguration)
         {            
             _module.AddConfiguration(confuguration);
 
             foreach (var document in _module.GetDocuments().Where(x => x.ConfigurationName == confuguration.Name))
             {
-                document.ApplyConfiguration(confuguration);
+                confuguration.ApplyToDocument(document);
             }
         }
 

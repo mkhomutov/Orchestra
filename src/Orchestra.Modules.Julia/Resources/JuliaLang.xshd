@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0"?>
-<SyntaxDefinition xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+<SyntaxDefinition name="Julia" extensions=".jl" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
   <Color name="Comment" foreground="Green" exampleText="# comment" />
   <Color name="Keywords" fontWeight="bold" foreground="Blue" exampleText=" "/>
   <Color name="ValueTypes" fontWeight="bold" foreground="Red" exampleText=" " />

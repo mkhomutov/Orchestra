@@ -12,6 +12,7 @@ namespace Orchestra.Modules.TextEditor
     using ICSharpCode.AvalonEdit.Highlighting;
     using ICSharpCode.AvalonEdit.Highlighting.Xshd;
 
+    using Orchestra.Modules.TextEditor.Helpers;
     using Orchestra.Modules.TextEditor.Services.Interfaces;
 
     public class TextEditorConfigurationBuilder
@@ -22,32 +23,19 @@ namespace Orchestra.Modules.TextEditor
         #endregion
 
         #region Constructors
-        public TextEditorConfigurationBuilder(TextEditorModule module, string configName)
+        public TextEditorConfigurationBuilder(TextEditorModule module, string configurationName)
         {
             _module = module;
-            _configuration = new TextEditorConfiguration(configName);
+            _configuration = new TextEditorConfiguration(configurationName);
         }
         #endregion
 
         #region Methods
-        public TextEditorConfigurationBuilder AddHighlightingSchema(string name, string schema)
-        {
-            using (var strRead = new StringReader(schema))
-            {
-                using (var reader = XmlReader.Create(strRead))
-                {
-                    var xshd = HighlightingLoader.LoadXshd(reader);
-                    var hilightning = HighlightingLoader.Load(xshd, new HighlightingManager());
-                    _configuration.AddHighlighting(name, hilightning);
-                }
-            }
 
-            return this;
-        }
-
-        public TextEditorConfigurationBuilder AddDefaultFileNameDefinition(string fileName)
+        public TextEditorConfigurationBuilder AddDefaultFileNameDefinition(string name, params string[] extensions)
         {
-            _configuration.AddDefaultFileName(fileName);
+            FileNamesManager.Instance.RegisterDefaultFileNameDefinition(name, extensions);
+
             return this;
         }
 

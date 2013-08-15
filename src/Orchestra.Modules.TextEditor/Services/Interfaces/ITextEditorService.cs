@@ -26,6 +26,9 @@ namespace Orchestra.Modules.TextEditor.Services.Interfaces
         /// </summary>
         /// <returns></returns>
         Document GetActiveDocument();
+
+        void RegisterHighlighting(string schema, params string[] extensions);
+
         #endregion
 
         void ApplyConfiguration(TextEditorConfiguration confuguration);

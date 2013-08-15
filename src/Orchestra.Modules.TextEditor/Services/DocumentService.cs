@@ -7,6 +7,8 @@ namespace Orchestra.Modules.TextEditor.Services
 {
     using Catel.IoC;
 
+    using ICSharpCode.AvalonEdit.Highlighting;
+
     using Orchestra.Modules.TextEditor.Helpers;
     using Orchestra.Modules.TextEditor.Models;
     using Orchestra.Modules.TextEditor.Services.Interfaces;
@@ -14,10 +16,12 @@ namespace Orchestra.Modules.TextEditor.Services
     public class DocumentService : IDocumentService
     {
         public void GenerateAndApplyNewFileName(Document document, string fileExtension)
-        {
-            var textEditorService = (ITextEditorService)ServiceLocator.Default.ResolveType(typeof(ITextEditorService));
-            var config = textEditorService.GetConfigurationByName(document.ConfigurationName);
-            //config.GetHighlighting()
+        {            
+            document.FileName = FileNamesManager.Instance.GetNexDefaulFileName(fileExtension);
+            document.CurrentHighlighting = HighlightingManager.Instance.GetDefinitionByExtension(fileExtension);
+
+       /*     var textEditorService = (ITextEditorService)ServiceLocator.Default.ResolveType(typeof(ITextEditorService));
+            textEditorService.*/
         }
     }
 }
