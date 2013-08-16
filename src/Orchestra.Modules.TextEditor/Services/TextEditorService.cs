@@ -80,7 +80,7 @@ namespace Orchestra.Modules.TextEditor.Services
 
             foreach (var document in _module.GetDocuments().Where(x => x.ConfigurationName == confuguration.Name))
             {
-                confuguration.ApplyToDocument(document);
+                //confuguration.ApplyToDocument(document);
             }
         }
 

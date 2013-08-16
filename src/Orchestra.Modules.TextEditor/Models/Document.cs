@@ -10,7 +10,6 @@ namespace Orchestra.Modules.TextEditor.Models
     using System;
     using Catel.Data;
     using ICSharpCode.AvalonEdit.Highlighting;
-    using ReactiveUI;
 
     public class Document : ObservableObject
     {
@@ -19,15 +18,13 @@ namespace Orchestra.Modules.TextEditor.Models
         {
             Id = Guid.NewGuid();
             ConfigurationName = configurationName;
-            FileName = string.Empty;
-            
         }
         #endregion
 
         #region Properties
         public Guid Id { get; private set; }
 
-        public string FileName { get; set; } 
+        public string FileName { get; set; }
 
         public bool Saved { get; set; }
 

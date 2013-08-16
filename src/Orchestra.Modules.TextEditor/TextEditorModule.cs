@@ -66,7 +66,7 @@ namespace Orchestra.Modules.TextEditor
         internal void AddDocument(TextEditorViewModel textEditorViewModel)
         {
             _documents.Add(textEditorViewModel.Document, textEditorViewModel);
-            _configurations[textEditorViewModel.Document.ConfigurationName].ApplyToDocument(textEditorViewModel.Document);
+            //_configurations[textEditorViewModel.Document.ConfigurationName].ApplyToDocument(textEditorViewModel.Document);
         }
         #endregion
 

@@ -20,7 +20,7 @@ namespace Orchestra.Modules.TextEditor.Services
             document.FileName = FileNamesManager.Instance.GetNexDefaulFileName(fileExtension);
             document.CurrentHighlighting = HighlightingManager.Instance.GetDefinitionByExtension(fileExtension);
 
-       /*     var textEditorService = (ITextEditorService)ServiceLocator.Default.ResolveType(typeof(ITextEditorService));
+/*            var textEditorService = (ITextEditorService)ServiceLocator.Default.ResolveType(typeof(ITextEditorService));
             textEditorService.*/
         }
     }

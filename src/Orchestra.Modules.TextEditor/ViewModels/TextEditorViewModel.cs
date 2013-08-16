@@ -8,41 +8,54 @@
 namespace Orchestra.Modules.TextEditor.ViewModels
 {
     using System;
-    using System.Reactive;
+    using System.ComponentModel;
+
+    using Catel;
+
     using Orchestra.Modules.TextEditor.Models;
     using Orchestra.ViewModels;
-    using ReactiveUI;
-    using System.Linq;
+
     using System.Reactive.Linq;
     /// <summary>
     /// JuliaLangEditor view model
     /// </summary>
     internal class TextEditorViewModel : ViewModelBase
     {
+        private readonly string _documentFileNamePropertyName;
         public TextEditorViewModel()
         {
+            _documentFileNamePropertyName = ExpressionHelper.GetPropertyName(() => Document.FileName);
         }
 
         #region Properties
         private Document _document;
-        private IDisposable _bindingToTitle;
+
         public Document Document
         {
             get { return _document; }
             set
             {
-                if (_bindingToTitle != null)
+                if (_document != null)
                 {
-                    _bindingToTitle.Dispose();
-                    _bindingToTitle = null;
+                    throw new InvalidOperationException();
                 }
 
                 _document = value;
-                _bindingToTitle = _document.ObservableForProperty(x => x.FileName)
-                                           .Select(x => x.Value)
-                                           .BindTo(this, x => x.Title);
+
+                Observable.FromEvent<PropertyChangedEventHandler,
+                    PropertyChangedEventArgs>(
+                    h => ((sender, args) => h(args)),
+                    h => Document.PropertyChanged += h,
+                    h => Document.PropertyChanged -= h)
+                    .Where(x => x.PropertyName == _documentFileNamePropertyName).Select(x => Document.FileName).Subscribe(SetTitle);
             }
         }
+
+        private void SetTitle(string fileName)
+        {
+            Title = fileName;
+        }
+
         #endregion
     }
 }
