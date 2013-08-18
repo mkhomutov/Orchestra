@@ -8,6 +8,7 @@ namespace Orchestra.Services
 {
     using System;
     using Catel.MVVM;
+    using Catel.Windows.Controls;
     using Orchestra.Models;
 
     /// <summary>
@@ -41,6 +42,12 @@ namespace Orchestra.Services
         /// <exception cref="ArgumentNullException">The <paramref name="viewModel"/> is <c>null</c>.</exception>
         void ShowDocument<TViewModel>(TViewModel viewModel, object tag = null)
             where TViewModel : IViewModel;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        bool IsActive<TViewModel>(object tag = null) where TViewModel : IViewModel;
 
         /// <summary>
         /// Closes the document in the main shell with the specified view model.

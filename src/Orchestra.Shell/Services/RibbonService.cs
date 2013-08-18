@@ -112,10 +112,11 @@ namespace Orchestra.Services
         /// <typeparam name="TView">The type of the T view.</typeparam>
         /// <param name="ribbonControl">The ribbon item.</param>
         /// <param name="contextualTabGroupName">The contextual tab group name.</param>
+        /// <param name="tag"></param>
         /// <exception cref="ArgumentNullException">The <paramref name="ribbonControl"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">The <paramref name="contextualTabGroupName"/> is <c>null</c> or whitespace.</exception>
-        public void RegisterContextualRibbonItem<TView>(IRibbonControl ribbonControl, string contextualTabGroupName)
-            where TView : DocumentView
+        public void RegisterContextualRibbonItem<TView>(IRibbonControl ribbonControl, string contextualTabGroupName, object tag = null)
+            where TView : IDocumentView
         {
             RegisterContextualRibbonItem(typeof(TView), ribbonControl, contextualTabGroupName);
         }
@@ -126,10 +127,11 @@ namespace Orchestra.Services
         /// <param name="viewType">Type of the view.</param>
         /// <param name="ribbonControl">The ribbon item.</param>
         /// <param name="contextualTabGroupName">The contextual tab group name.</param>
+        /// <param name="tag"></param>
         /// <exception cref="ArgumentNullException">The <paramref name="viewType"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="ribbonControl"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">The <paramref name="contextualTabGroupName"/> is <c>null</c> or whitespace.</exception>
-        public void RegisterContextualRibbonItem(Type viewType, IRibbonControl ribbonControl, string contextualTabGroupName)
+        public void RegisterContextualRibbonItem(Type viewType, IRibbonControl ribbonControl, string contextualTabGroupName, object tag = null)
         {
             Argument.IsNotNull("viewType", viewType);
             Argument.IsNotNull("ribbonControl", ribbonControl);
@@ -157,20 +159,18 @@ namespace Orchestra.Services
 
             Log.Debug("Adding ribbon item '{0}'", ribbonControl);
 
-            var ribbon = GetService<Ribbon>();
-
             RibbonTabItem tab;
             if (ribbonControl.Context == RibbonContext.View)
             {
-                tab = ribbon.EnsureContextualTabItem(ribbonControl.TabItemHeader, ribbonControl.ContextualTabItemGroupName);
+                tab = _ribbon.EnsureContextualTabItem(ribbonControl.TabItemHeader, ribbonControl.ContextualTabItemGroupName);
             }
             else
             {
-                tab = ribbon.EnsureTabItem(ribbonControl.TabItemHeader);
+                tab = _ribbon.EnsureTabItem(ribbonControl.TabItemHeader);
             }
 
             var group = tab.EnsureGroupBox(ribbonControl.GroupBoxHeader);
-
+            
             group.AddRibbonItem(ribbonControl);
 
             Log.Debug("Added ribbon item '{0}'", ribbonControl);
@@ -189,8 +189,7 @@ namespace Orchestra.Services
 
             Log.Debug("Removing ribbon '{0}'", ribbonControl);
 
-            var ribbon = GetService<Ribbon>();
-            ribbon.RemoveItem(ribbonControl);
+            _ribbon.RemoveItem(ribbonControl);
 
             Log.Debug("Removed ribbon '{0}'", ribbonControl);
         }
@@ -236,21 +235,30 @@ namespace Orchestra.Services
 
             var documentViewType = documentView.GetType();
 
-            if (!_viewSpecificRibbonItems.ContainsKey(documentViewType))
+            var views = _viewSpecificRibbonItems.Where(view => view.Key.IsInstanceOfType(documentView)).ToDictionary(val => val.Key, val => val.Value);
+
+            if (!views.Any())
             {
                 return;
             }
 
-            var viewSpecificRibbonItems = _viewSpecificRibbonItems[documentViewType];
-            foreach (var viewSpecificRibbonItem in viewSpecificRibbonItems)
+            List<IRibbonControl> viewSpecificRibbonItems = null;
+            if (views.ContainsKey(documentViewType))
             {
-                if (viewSpecificRibbonItem.Context == RibbonContext.View)
-                {
-                    Log.Debug("Adding ribbon item '{0}' which has a view context", viewSpecificRibbonItem);
+                viewSpecificRibbonItems = views[documentViewType];
+            }
+            else
+            {
+                viewSpecificRibbonItems = views.SelectMany(val => val.Value)
+                                               .ToList();
+            }
 
-                    var contextualGroup = _ribbon.EnsureContextualTabGroup(viewSpecificRibbonItem.ContextualTabItemGroupName);
-                    contextualGroup.Visibility = Visibility.Visible;
-                }
+            foreach (var viewSpecificRibbonItem in viewSpecificRibbonItems.Where(x => x.Context == RibbonContext.View))
+            {
+                Log.Debug("Adding ribbon item '{0}' which has a view context", viewSpecificRibbonItem);
+
+                var contextualGroup = _ribbon.EnsureContextualTabGroup(viewSpecificRibbonItem.ContextualTabItemGroupName);
+                contextualGroup.Visibility = Visibility.Visible;
             }
 
             var lastRibbonItem = viewSpecificRibbonItems.Last();

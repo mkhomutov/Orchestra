@@ -70,7 +70,7 @@ namespace Orchestra
         {
             Argument.IsNotNull("viewType", viewType);
 
-            return (from document in LayoutDocumentPane.Children where document is LayoutDocument && document.Content.GetType() == viewType && TagHelper.AreTagsEqual(tag, ((IView) document.Content).Tag) select document).Cast<LayoutDocument>().FirstOrDefault();
+            return (from document in LayoutDocumentPane.Children where document is LayoutDocument && document.Content.GetType() == viewType && TagHelper.AreTagsEqual(tag, ((IView)document.Content).Tag) select document).Cast<LayoutDocument>().FirstOrDefault();
         }
 
         /// <summary>
@@ -83,6 +83,15 @@ namespace Orchestra
             Argument.IsNotNull("document", document);
 
             LayoutDocumentPane.SelectedContentIndex = LayoutDocumentPane.IndexOfChild(document);
+        }
+
+        /// <summary>
+        /// Gets currently activated document in the docking manager.
+        /// </summary>
+        /// <returns>The active document.</returns>
+        public static LayoutDocument GetActiveDocument()
+        {
+            return LayoutDocumentPane.Children[LayoutDocumentPane.SelectedContentIndex] as LayoutDocument;
         }
 
         /// <summary>
@@ -112,7 +121,7 @@ namespace Orchestra
         /// <exception cref="ArgumentNullException">The <paramref name="view" /> is <c>null</c>.</exception>
         private static LayoutDocument WrapViewInLayoutDocument(FrameworkElement view, object tag = null)
         {
-            return new BindableLayoutDocument(view);
+            return new BindableLayoutDocument(view, tag);
         }
 
         /// <summary>

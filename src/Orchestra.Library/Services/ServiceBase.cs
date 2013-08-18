@@ -14,6 +14,7 @@ namespace Orchestra.Services
     public abstract class ServiceBase : IServiceProvider
     {
         #region Methods
+        // TODO: Service should not know anything about how to resolve other services
         /// <summary>
         /// Gets the service object of the specified type.
         /// </summary>

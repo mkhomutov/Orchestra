@@ -29,10 +29,11 @@ namespace Orchestra.Services
         /// <typeparam name="TView">The type of the T view.</typeparam>
         /// <param name="ribbonItem">The ribbon item.</param>
         /// <param name="contextualTabGroupName">The contextual tab group name.</param>
+        /// <param name="tag"></param>
         /// <exception cref="ArgumentNullException">The <paramref name="ribbonItem"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">The <paramref name="contextualTabGroupName"/> is <c>null</c> or whitespace.</exception>
-        void RegisterContextualRibbonItem<TView>(IRibbonControl ribbonItem, string contextualTabGroupName)
-            where TView : DocumentView;
+        void RegisterContextualRibbonItem<TView>(IRibbonControl ribbonItem, string contextualTabGroupName, object tag = null)
+            where TView : IDocumentView;
 
         /// <summary>
         /// Registers the ribbon item bound to a specific view type.
@@ -40,9 +41,10 @@ namespace Orchestra.Services
         /// <param name="viewType">Type of the view.</param>
         /// <param name="ribbonItem">The ribbon item.</param>
         /// <param name="contextualTabGroupName">The contextual tab group name.</param>
+        /// <param name="tag"></param>
         /// <exception cref="ArgumentNullException">The <paramref name="viewType"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="ribbonItem"/> is <c>null</c>.</exception>
         /// <exception cref="ArgumentException">The <paramref name="contextualTabGroupName"/> is <c>null</c> or whitespace.</exception>
-        void RegisterContextualRibbonItem(Type viewType, IRibbonControl ribbonItem, string contextualTabGroupName);
+        void RegisterContextualRibbonItem(Type viewType, IRibbonControl ribbonItem, string contextualTabGroupName, object tag);
     }
 }

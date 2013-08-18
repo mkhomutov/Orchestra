@@ -1,0 +1,115 @@
+﻿<?xml version="1.0"?>
+<SyntaxDefinition name="Julia" extensions=".jl" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+  <Color name="Comment" foreground="Green" exampleText="# comment" />
+  <Color name="Keywords" fontWeight="bold" foreground="Blue" exampleText=" "/>
+  <Color name="ValueTypes" fontWeight="bold" foreground="Red" exampleText=" " />
+  <Color name="String" foreground="Blue" exampleText="string text = &quot;Hello, World!&quot;"/>
+  <Color name="Escape" fontWeight="bold" foreground="Red" exampleText="string text = &quot;\\x10&quot;"/>
+  <Color name="Char" foreground="Magenta" exampleText=" "/>
+  <Color name="TrueFalse" fontWeight="bold" foreground="DarkCyan" exampleText=" " />
+  <Color name="Identifier" foreground="MidnightBlue" fontWeight="bold" exampleText=" "/>
+  <Color name="Operator" fontWeight="bold" foreground="Pink" exampleText=" "/>
+  <Color name="Punctuation" foreground="Red"  exampleText=" " />
+  
+  <RuleSet name="CommentMarkerSet">
+    <Keywords fontWeight="bold" foreground="Red">
+      <Word>TODO</Word>
+      <Word>FIXME</Word>
+    </Keywords>
+    <Keywords fontWeight="bold" foreground="#E0E000">
+      <Word>HACK</Word>
+      <Word>UNDONE</Word>
+    </Keywords>
+  </RuleSet>
+
+  <!-- This is the main ruleset. -->
+  <RuleSet>
+    <Span color="Comment" ruleSet="CommentMarkerSet">
+      <Begin>\#</Begin>
+    </Span>
+
+    <Span color="String">
+      <Begin>"</Begin>
+      <End>"</End>
+      <RuleSet>
+        <Rule color="Escape">
+          \\( " | \\
+          | n | r | t
+          | (x [0-9a-fA-F]{2})
+          | (u [0-9a-fA-F]{4})
+          | (U [0-9a-fA-F]{8}) )
+        </Rule>
+      </RuleSet>
+    </Span>
+
+    <Rule color="Char">
+      '( [^'\\] | \\( ' | \\
+      | n | r | t
+      | (x [0-9a-fA-F]{2})
+      | (u [0-9a-fA-F]{4})
+      | (U [0-9a-fA-F]{8}) ) )'
+    </Rule>
+    
+    <Rule color="Keywords">
+      \b( abstract | begin | bitstype | break | catch | ccall
+      | const | continue | else | elseif | end
+      | export | for | function | global | if
+      | import | let | local | macro | module | quote
+      | return | try | type | typealias | while )\b
+    </Rule>
+
+    <Rule color="ValueTypes">
+      \b( Int8 | Int16 | Int32 | Int64
+      | Uint8 | Uint16 | Uint32 | Uint64
+      | Float32 | Float64
+      | Complex64 | Complex128
+      | Any | Char | Bool | String )\b
+    </Rule>
+
+    <Rule color="TrueFalse">
+      \b(true|false)\b
+    </Rule>
+
+    <Rule color="Identifier">
+      \b(\w+)\b
+    </Rule>
+
+    <Rule color="Operator">
+      =
+      | &lt; | &lt;=
+      | ==   | !=
+      | &gt; | &gt;=
+      | !
+      | ~
+      | \|\| | &amp;&amp;
+      | \+
+      | \-
+      | \*
+      | \/
+      | \%
+      | \^
+      | &amp;
+      | \|
+      | &lt;&lt;
+      | &gt;&gt;
+      | &gt;&gt;&gt; =?
+    </Rule>
+
+    <Rule color="Punctuation">
+      @
+      | \.
+      | \.\.\.
+      | ,
+      | ;
+      | :
+      | ::
+      | \?
+      | -&gt; | &lt;- | &lt;-&gt;
+      | \( | \)
+      | \[ | \]
+      | \{ | \}
+      | \# | \#\{ | \#&lt;
+    </Rule>
+  </RuleSet>  
+ 
+</SyntaxDefinition>
