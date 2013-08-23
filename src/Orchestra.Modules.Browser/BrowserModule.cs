@@ -32,8 +32,8 @@ namespace Orchestra.Modules.Browser
         /// <summary>
         /// Initializes a new instance of the <see cref="BrowserModule"/> class. 
         /// </summary>
-        public BrowserModule()
-            : base(Name)
+        public BrowserModule(IRibbonService ribbonService)
+            : base(Name, ribbonService)
         {
         }
 

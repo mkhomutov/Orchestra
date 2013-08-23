@@ -14,7 +14,7 @@ namespace Orchestra.Modules.Julia.ViewModels
         #region Constructors
         public JuliaStartPageViewModel()
         {
-            Title = "Julia start page";
+            Title = "Julia start page";           
         }
         #endregion
     }

@@ -7,41 +7,38 @@
 
 namespace Orchestra.Modules.TextEditor
 {
-    using System.IO;
-    using System.Xml;
-    using ICSharpCode.AvalonEdit.Highlighting;
-    using ICSharpCode.AvalonEdit.Highlighting.Xshd;
-
     using Orchestra.Modules.TextEditor.Helpers;
-    using Orchestra.Modules.TextEditor.Services.Interfaces;
+    using Orchestra.Modules.TextEditor.Interfaces;
+    using Orchestra.Modules.TextEditor.Models;
+    using Orchestra.Modules.TextEditor.Models.Interfaces;
 
     public class TextEditorConfigurationBuilder
     {
         #region Fields
-        private readonly TextEditorConfiguration _configuration;
-        private readonly TextEditorModule _module;
+        private readonly ITextEditorConfiguration _configuration;
+        private readonly ITextEditorModule _module;
         #endregion
 
         #region Constructors
-        public TextEditorConfigurationBuilder(TextEditorModule module, string configurationName)
+        public TextEditorConfigurationBuilder(ITextEditorModule module, ITextEditorConfiguration configuration, string configurationName)
         {
             _module = module;
-            _configuration = new TextEditorConfiguration(configurationName);
+            _configuration = configuration;
+            _configuration.Name = configurationName;
         }
         #endregion
 
         #region Methods
-
         public TextEditorConfigurationBuilder AddDefaultFileNameDefinition(string name, params string[] extensions)
         {
-            FileNamesManager.Instance.RegisterDefaultFileNameDefinition(name, extensions);
+            FileNamesManager.DefaultInstance.RegisterDefaultFileNameDefinition(name, extensions);
 
             return this;
         }
 
-        public TextEditorConfiguration Build()
-        {            
-            return _configuration;            
+        public void Apply()
+        {
+            _module.ApplyConfiguration(_configuration);
         }
         #endregion
     }

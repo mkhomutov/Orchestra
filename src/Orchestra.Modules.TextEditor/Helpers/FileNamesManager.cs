@@ -1,33 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Orchestra.Modules.TextEditor.Helpers
+﻿namespace Orchestra.Modules.TextEditor.Helpers
 {
+    using System.Collections.Generic;
     using Orchestra.Modules.TextEditor.Exceptions;
 
     internal class FileNamesManager
     {
-        private static readonly FileNamesManager _instance = new FileNamesManager();
-        private readonly IDictionary<string, string> _defaultFileNames = new Dictionary<string, string>();
+        #region Constants
+        private static readonly FileNamesManager _defaultInstance = new FileNamesManager();
+        #endregion
+
+        #region Fields
         private readonly IDictionary<string, int> _counters = new Dictionary<string, int>();
+        private readonly IDictionary<string, string> _defaultFileNames = new Dictionary<string, string>();
+        #endregion
 
-        private FileNamesManager()
+        #region Constructors
+        public FileNamesManager()
         {
         }
+        #endregion
 
-        public static FileNamesManager Instance 
+        #region Properties
+        public static FileNamesManager DefaultInstance
         {
-            get
-            {
-                return _instance;
-            }
+            get { return _defaultInstance; }
         }
+        #endregion
 
+        #region Methods
         public void RegisterDefaultFileNameDefinition(string name, params string[] extensions)
         {
-            foreach (var extension in extensions)
+            foreach (string extension in extensions)
             {
                 if (_defaultFileNames.ContainsKey(extension))
                 {
@@ -47,7 +50,6 @@ namespace Orchestra.Modules.TextEditor.Helpers
 
             return string.Format("{0}{1}{2}", _defaultFileNames[extension], _counters[extension]++, extension);
         }
-
-
+        #endregion
     }
 }

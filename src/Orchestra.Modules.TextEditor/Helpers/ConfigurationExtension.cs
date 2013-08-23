@@ -7,16 +7,7 @@
 
 namespace Orchestra.Modules.TextEditor.Helpers
 {
-    using System;
-    using System.Linq;
-
-    using ICSharpCode.AvalonEdit.Highlighting;
-
-    using Orchestra.Modules.TextEditor.Exceptions;
-    using Orchestra.Modules.TextEditor.Models;
-
     internal static class ConfigurationExtension
     {
-       
     }
 }

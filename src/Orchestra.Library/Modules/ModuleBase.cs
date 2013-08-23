@@ -42,11 +42,11 @@ namespace Orchestra.Modules
         /// Initializes a new instance of the <see cref="ModuleBase"/> class.
         /// </summary>
         /// <param name="moduleName">Name of the module.</param>
+        /// <param name="ribbonService">Ribbin control service.</param>
         /// <exception cref="ArgumentException">The <paramref name="moduleName"/> is <c>null</c> or whitespace.</exception>
-        protected ModuleBase(string moduleName) 
+        protected ModuleBase(string moduleName, IRibbonService ribbonService) 
             : base(moduleName)
         {
-            var ribbonService = GetService<IRibbonService>();
             InitializeRibbon(ribbonService);
         }
 

@@ -38,19 +38,19 @@
   <ItemGroup>
     <Reference Include="Catel.Core, Version=3.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\Catel.Core.3.6.1308162044-beta\lib\net40\Catel.Core.dll</HintPath>
+      <HintPath>..\..\lib\Catel.Core.3.6.1308192112-beta\lib\net40\Catel.Core.dll</HintPath>
     </Reference>
     <Reference Include="Catel.Extensions.Controls, Version=3.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\Catel.Extensions.Controls.3.6.1308162044-beta\lib\net40\Catel.Extensions.Controls.dll</HintPath>
+      <HintPath>..\..\lib\Catel.Extensions.Controls.3.6.1308192112-beta\lib\net40\Catel.Extensions.Controls.dll</HintPath>
     </Reference>
     <Reference Include="Catel.Extensions.Prism, Version=3.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\Catel.Extensions.Prism.3.6.1308162044-beta\lib\net40\Catel.Extensions.Prism.dll</HintPath>
+      <HintPath>..\..\lib\Catel.Extensions.Prism.3.6.1308192112-beta\lib\net40\Catel.Extensions.Prism.dll</HintPath>
     </Reference>
     <Reference Include="Catel.MVVM, Version=3.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\Catel.MVVM.3.6.1308162044-beta\lib\net40\Catel.MVVM.dll</HintPath>
+      <HintPath>..\..\lib\Catel.MVVM.3.6.1308192112-beta\lib\net40\Catel.MVVM.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.AvalonEdit">
       <HintPath>..\..\lib\AvalonEdit.4.3.1.9430\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
@@ -99,7 +99,7 @@
     </Reference>
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\Catel.MVVM.3.6.1308162044-beta\lib\net40\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\..\lib\Catel.MVVM.3.6.1308192112-beta\lib\net40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -114,6 +114,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\ConfigurationNotFoundException.cs" />
     <Compile Include="Exceptions\DefaultFileNameDefinitionDuplicatedExtension.cs" />
     <Compile Include="Exceptions\DefaultFileNameDefinitionNotFoundExtension.cs" />
     <Compile Include="Exceptions\HighlightingDefinitionDuplicatedException.cs" />
@@ -122,14 +123,24 @@
     <Compile Include="Helpers\ConfigurationExtension.cs" />
     <Compile Include="Helpers\DocumentExtension.cs" />
     <Compile Include="Helpers\FileNamesManager.cs" />
+    <Compile Include="Helpers\Interfaces\IFileNamesManager.cs" />
+    <Compile Include="Interfaces\ITextEditorModule.cs" />
+    <Compile Include="Models\CongigurationsStorage.cs" />
     <Compile Include="Models\Document.cs" />
+    <Compile Include="Models\DocumentsStorage.cs" />
+    <Compile Include="Models\Interfaces\IConfigurationsStorage.cs" />
+    <Compile Include="Models\Interfaces\IDocument.cs" />
+    <Compile Include="Models\Interfaces\IDocumentsStorage.cs" />
+    <Compile Include="Models\Interfaces\ITextEditorConfiguration.cs" />
+    <Compile Include="ModuleInitializer.cs" />
     <Compile Include="Services\DocumentService.cs" />
     <Compile Include="Services\Interfaces\IDocumentService.cs" />
     <Compile Include="Services\Interfaces\ITextEditorService.cs" />
     <Compile Include="Services\TextEditorService.cs" />
-    <Compile Include="TextEditorConfiguration.cs" />
+    <Compile Include="Models\TextEditorConfiguration.cs" />
     <Compile Include="TextEditorConfigurationBuilder.cs" />
     <Compile Include="TextEditorModule.cs" />
+    <Compile Include="ViewModels\Interfaces\ITextEditorViewModel.cs" />
     <Compile Include="ViewModels\TextEditorViewModel.cs" />
     <Compile Include="Views\Interfaces\ITextEditorView.cs" />
     <Compile Include="Views\TextEditorView.xaml.cs">

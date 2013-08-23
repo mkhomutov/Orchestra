@@ -8,6 +8,7 @@
 namespace Orchestra.Modules.Julia
 {
     using System;
+    using System.Collections.Generic;
     using Catel.IoC;
     using Catel.MVVM;
     using Catel.Messaging;
@@ -18,6 +19,7 @@ namespace Orchestra.Modules.Julia
     using Orchestra.Modules.Julia.Views.Interfaces;
     using Orchestra.Modules.TextEditor.Models;
     using Orchestra.Modules.TextEditor.Services.Interfaces;
+    using Orchestra.Modules.TextEditor.ViewModels.Interfaces;
     using Orchestra.Modules.TextEditor.Views.Interfaces;
     using Orchestra.Services;
 
@@ -34,8 +36,8 @@ namespace Orchestra.Modules.Julia
         /// <summary>
         /// Initializes the module.
         /// </summary>
-        public JuliaModule()
-            : base("JuliaModule")
+        public JuliaModule(IRibbonService ribbonService)
+            : base("JuliaModule", ribbonService)
         {
             MessageMediator.Default.Register<ModuleInitialized>(this, OnModuleInitialized);
         }
@@ -84,11 +86,11 @@ namespace Orchestra.Modules.Julia
 
         private static void ConfigureTextEditor()
         {
-            var textEditorService = (ITextEditorService) ServiceLocator.Default.ResolveType(typeof (ITextEditorService));
+            var textEditorService = DependencyResolverManager.Default.DefaultDependencyResolver.Resolve<ITextEditorService>();
 
-            var config = textEditorService.Configure(ConfigurationName).AddDefaultFileNameDefinition("NewFile", ".jl").Build();
-
-            textEditorService.ApplyConfiguration(config);
+            textEditorService.Configure(ConfigurationName)
+                             .AddDefaultFileNameDefinition("NewFile", ".jl")
+                             .Apply();
         }
 
         private static void OnNew()
@@ -128,7 +130,7 @@ namespace Orchestra.Modules.Julia
                 return false;
             }
 
-            var textEditorService = (ITextEditorService) ServiceLocator.Default.ResolveType(typeof (ITextEditorService));
+            var textEditorService = DependencyResolverManager.Default.DefaultDependencyResolver.Resolve<ITextEditorService>();
             var activeDocument = textEditorService.GetActiveDocument();
             return activeDocument != null && activeDocument.Saved && activeDocument.Changed;
         }
@@ -152,7 +154,8 @@ namespace Orchestra.Modules.Julia
 
         private static bool IsServiceRegistered<T>()
         {
-            return ServiceLocator.Default.AreAllTypesRegistered(typeof (T));
+            return DependencyResolverManager.Default.DefaultDependencyResolver.CanResolve<T>();
+      //      return ServiceLocator.Default.AreAllTypesRegistered(typeof (T));
         }
 
         private void OnShowJuliaStartPage()

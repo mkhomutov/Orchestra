@@ -16,8 +16,8 @@
         /// <summary>
         /// Initializes the module.
         /// </summary>
-        public PluginManagerModule()
-            : base("PluginManagerModule")
+        public PluginManagerModule(IRibbonService ribbonService)
+            : base("PluginManagerModule", ribbonService)
         {
         }
 

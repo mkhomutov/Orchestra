@@ -10,28 +10,29 @@ namespace Orchestra.Modules.TextEditor.Models
     using System;
     using Catel.Data;
     using ICSharpCode.AvalonEdit.Highlighting;
+    using Orchestra.Modules.TextEditor.Models.Interfaces;
 
-    public class Document : ObservableObject
+    internal class Document : ObservableObject, IDocument
     {
         #region Constructors
-        public Document(string configurationName)
+        public Document()
         {
             Id = Guid.NewGuid();
-            ConfigurationName = configurationName;
         }
         #endregion
 
         #region Properties
         public Guid Id { get; private set; }
+        #endregion
 
+        #region IDocument Members
         public string FileName { get; set; }
 
         public bool Saved { get; set; }
 
         public bool Changed { get; set; }
 
-        //TODO: to think maybe store here configuration property. Or method GetConfigurationService() or something else
-        public string ConfigurationName { get; private set; }
+        public string ConfigurationName { get; set; }
 
         public IHighlightingDefinition CurrentHighlighting { get; set; }
         #endregion

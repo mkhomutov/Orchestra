@@ -7,7 +7,9 @@
 
 namespace Orchestra.Modules.TextEditor.Services.Interfaces
 {
+    using System.Collections.Generic;
     using Orchestra.Modules.TextEditor.Models;
+    using Orchestra.Modules.TextEditor.Models.Interfaces;
 
     /// <summary>
     /// The TextEditor management service.
@@ -20,19 +22,16 @@ namespace Orchestra.Modules.TextEditor.Services.Interfaces
         /// <summary>
         /// </summary>
         /// <returns></returns>
-        Document CreateDocument(string configurationName);
+        IDocument CreateDocument(string configurationName);
 
         /// <summary>
         /// </summary>
         /// <returns></returns>
-        Document GetActiveDocument();
+        IDocument GetActiveDocument();
 
         void RegisterHighlighting(string schema, params string[] extensions);
 
+        IEnumerable<ITextEditorConfiguration> GetConfigurations();
         #endregion
-
-        void ApplyConfiguration(TextEditorConfiguration confuguration);
-
-        TextEditorConfiguration GetConfigurationByName(string configurationName);
     }
 }

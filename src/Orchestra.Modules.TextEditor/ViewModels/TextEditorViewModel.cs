@@ -9,28 +9,32 @@ namespace Orchestra.Modules.TextEditor.ViewModels
 {
     using System;
     using System.ComponentModel;
-
+    using System.Reactive.Linq;
     using Catel;
-
-    using Orchestra.Modules.TextEditor.Models;
+    using Orchestra.Modules.TextEditor.Models.Interfaces;
+    using Orchestra.Modules.TextEditor.ViewModels.Interfaces;
     using Orchestra.ViewModels;
 
-    using System.Reactive.Linq;
     /// <summary>
     /// JuliaLangEditor view model
     /// </summary>
-    internal class TextEditorViewModel : ViewModelBase
+    internal class TextEditorViewModel : ViewModelBase, ITextEditorViewModel
     {
+        #region Fields
         private readonly string _documentFileNamePropertyName;
+
+        private IDocument _document;
+        #endregion
+
+        #region Constructors
         public TextEditorViewModel()
         {
             _documentFileNamePropertyName = ExpressionHelper.GetPropertyName(() => Document.FileName);
         }
+        #endregion
 
-        #region Properties
-        private Document _document;
-
-        public Document Document
+        #region ITextEditorViewModel Members
+        public IDocument Document
         {
             get { return _document; }
             set
@@ -44,18 +48,21 @@ namespace Orchestra.Modules.TextEditor.ViewModels
 
                 Observable.FromEvent<PropertyChangedEventHandler,
                     PropertyChangedEventArgs>(
-                    h => ((sender, args) => h(args)),
-                    h => Document.PropertyChanged += h,
-                    h => Document.PropertyChanged -= h)
-                    .Where(x => x.PropertyName == _documentFileNamePropertyName).Select(x => Document.FileName).Subscribe(SetTitle);
+                        h => ((sender, args) => h(args)),
+                        h => Document.PropertyChanged += h,
+                        h => Document.PropertyChanged -= h)
+                          .Where(x => x.PropertyName == _documentFileNamePropertyName)
+                          .Select(x => Document.FileName)
+                          .Subscribe(SetTitle);
             }
         }
+        #endregion
 
+        #region Methods
         private void SetTitle(string fileName)
         {
             Title = fileName;
         }
-
         #endregion
     }
 }

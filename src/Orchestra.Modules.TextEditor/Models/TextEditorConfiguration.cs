@@ -5,29 +5,17 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 
-namespace Orchestra.Modules.TextEditor
+namespace Orchestra.Modules.TextEditor.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
+    using Orchestra.Modules.TextEditor.Models.Interfaces;
 
-    using ICSharpCode.AvalonEdit.Highlighting;
-    using Orchestra.Modules.TextEditor.Exceptions;
-    using Orchestra.Modules.TextEditor.Models;
-
-    public class TextEditorConfiguration
+    public class TextEditorConfiguration : ITextEditorConfiguration
     {
-
-        public TextEditorConfiguration(string configurationName)
-        {
-            Name = configurationName;
-        }
         #region Properties
         /// <summary>
         /// The name of this configuration.
         /// </summary>
-        public string Name { get; private set; }
-
+        public string Name { get; set; }
         #endregion
     }
 }

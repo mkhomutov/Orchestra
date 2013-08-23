@@ -50,8 +50,9 @@ namespace Orchestra.Modules.OxyPlot
         /// Initializes a new instance of the <see cref="T:Catel.Modules.ModuleBase`1" /> class.
         /// </summary>
         /// <param name="messageMediator">The message mediator.</param>
-        public OxyPlotModule(IMessageMediator messageMediator)
-            : base(Name)
+        /// <param name="ribbonService"></param>
+        public OxyPlotModule(IMessageMediator messageMediator, IRibbonService ribbonService)
+            : base(Name, ribbonService)
         {
             messageMediator.Register(this, new Action<Tuple<ObservableCollection<int>, ObservableCollection<int>>>(OnPlot));
         }

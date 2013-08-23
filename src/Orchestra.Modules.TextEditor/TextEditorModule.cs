@@ -9,70 +9,63 @@ namespace Orchestra.Modules.TextEditor
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Catel.IoC;
-    using Orchestra.Modules.TextEditor.Helpers;
+    using Orchestra.Modules.TextEditor.Interfaces;
     using Orchestra.Modules.TextEditor.Models;
-    using Orchestra.Modules.TextEditor.Services;
-    using Orchestra.Modules.TextEditor.Services.Interfaces;
-    using Orchestra.Modules.TextEditor.ViewModels;
+    using Orchestra.Modules.TextEditor.Models.Interfaces;
+    using Orchestra.Modules.TextEditor.ViewModels.Interfaces;
+    using Orchestra.Services;
 
     /// <summary>
     /// The module.
     /// </summary>
-    public class TextEditorModule : ModuleBase
+    public class TextEditorModule : ModuleBase, ITextEditorModule
     {
         #region Fields
-        private readonly IDictionary<string, TextEditorConfiguration> _configurations = new Dictionary<string, TextEditorConfiguration>();
+        private readonly IConfigurationsStorage _configurations;
 
-        private readonly IDictionary<Document, TextEditorViewModel> _documents = new Dictionary<Document, TextEditorViewModel>();
+        private readonly IDocumentsStorage _documents;
         #endregion
 
         #region Constructors
         /// <summary>
         /// Initializes the module.
         /// </summary>
-        public TextEditorModule()
-            : base("TextEditorModule")
+        public TextEditorModule(IDocumentsStorage documents, IConfigurationsStorage configurations, IRibbonService ribbonService)
+            : base("TextEditorModule", ribbonService)
         {
+            _documents = documents;
+            _configurations = configurations;
         }
         #endregion
 
-        #region Methods
-        /// <summary>
-        /// Called when the module is initialized.
-        /// </summary>
-        protected override void OnInitialized()
+        #region ITextEditorModule Members
+        public void ApplyConfiguration(ITextEditorConfiguration configuration)
         {
-            ServiceLocator.Default.RegisterInstance(typeof (ITextEditorService), new TextEditorService(this));
-            ServiceLocator.Default.RegisterInstance(typeof(IDocumentService), new DocumentService());
-            base.OnInitialized();
-        }
-
-        public void AddConfiguration(TextEditorConfiguration configuration)
-        {
-            if (_configurations.ContainsKey(configuration.Name))
+            if (_configurations.Existed(configuration))
             {
-                _configurations.Remove(configuration.Name);
+                _configurations.Replace(configuration);
             }
-
-            _configurations.Add(configuration.Name, configuration);
+            else
+            {
+                _configurations.Add(configuration);
+            }
         }
 
-        internal IEnumerable<Document> GetDocuments()
+        public IEnumerable<IDocument> GetDocuments()
         {
-            return _documents.Select(x => x.Key);
+            return _documents.GetAll()
+                             .Select(x => x.Document);
         }
 
-        internal void AddDocument(TextEditorViewModel textEditorViewModel)
+        public void AddDocument(ITextEditorViewModel textEditorViewModel)
         {
-            _documents.Add(textEditorViewModel.Document, textEditorViewModel);
-            //_configurations[textEditorViewModel.Document.ConfigurationName].ApplyToDocument(textEditorViewModel.Document);
+            _documents.Add(textEditorViewModel);
+        }
+
+        public IEnumerable<ITextEditorConfiguration> GetConfigurations()
+        {
+            return _configurations.GetAll();
         }
         #endregion
-
-        public TextEditorConfiguration GetConfigurationByName(string configurationName)
-        {
-            return _configurations[configurationName];
-        }
     }
 }

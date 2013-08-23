@@ -24,8 +24,8 @@ namespace Orchestra.Modules.PlotDemo
         /// <summary>
         /// Initializes a new instance of the <see cref="T:System.Object"/> class.
         /// </summary>
-        public PlotDemoModule()
-            : base(Name)
+        public PlotDemoModule(IRibbonService ribbonService)
+            : base(Name, ribbonService)
         {
         }
 

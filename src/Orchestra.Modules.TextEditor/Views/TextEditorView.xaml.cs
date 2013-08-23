@@ -21,7 +21,7 @@ namespace Orchestra.Modules.TextEditor.Views
         /// </summary>
         public TextEditorView()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
         #endregion
     }

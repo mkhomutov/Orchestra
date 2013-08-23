@@ -32,8 +32,8 @@ namespace Orchestra.Modules.DataGrid
         /// <summary>
         /// Initializes a new instance of the <see cref="DataGridModule" /> class.
         /// </summary>
-        public DataGridModule(IOrchestraService orchestraService)
-            : base(Name)
+        public DataGridModule(IOrchestraService orchestraService, IRibbonService ribbonService)
+            : base(Name, ribbonService)
         {
             Argument.IsNotNull(() => orchestraService);
 

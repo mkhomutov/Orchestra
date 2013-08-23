@@ -3,6 +3,8 @@
 //   Copyright (c) 2008 - 2013 Orchestra development team. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+
+
 namespace Orchestra.Modules.TextEditor.Exceptions
 {
     using System;
@@ -11,6 +13,7 @@ namespace Orchestra.Modules.TextEditor.Exceptions
     [Serializable]
     public class TextEditorConfigurationException : TextEditorException
     {
+        #region Constructors
         public TextEditorConfigurationException()
         {
         }
@@ -28,5 +31,6 @@ namespace Orchestra.Modules.TextEditor.Exceptions
             StreamingContext context) : base(info, context)
         {
         }
+        #endregion
     }
 }
