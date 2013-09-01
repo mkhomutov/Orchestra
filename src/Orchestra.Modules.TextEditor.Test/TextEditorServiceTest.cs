@@ -13,6 +13,8 @@ namespace Orchestra.Modules.TextEditor.Test
     using Orchestra.Modules.TextEditor.Models.Interfaces;
     using Orchestra.Modules.TextEditor.Test.Helpers;
     using NSubstitute;
+    using Orchestra.Modules.TextEditor.ViewModels.Interfaces;
+    using Orchestra.Services;
 
     [TestClass]
     public class TextEditorServiceTest
@@ -33,11 +35,14 @@ namespace Orchestra.Modules.TextEditor.Test
         public void CanCreateDocumentWithExistedConfuguration()
         {
             // Arrange
+            const string configName = "configName";
+
             var dependncyHelper = new DependenciesHelper();
             var textEditorService = dependncyHelper.CreateTextEditorServiceInstance();
 
             var configStorage = dependncyHelper.Resolve<IConfigurationsStorage>();
-            const string configName = "configName";
+            var docStorage = dependncyHelper.Resolve<IDocumentsStorage>();
+            var orchestra = dependncyHelper.Resolve<IOrchestraService>();
 
             var configuration = Substitute.For<ITextEditorConfiguration>();
             configuration.Name.Returns(configName);
@@ -61,6 +66,8 @@ namespace Orchestra.Modules.TextEditor.Test
             // Assert
             Assert.IsFalse(exceptionCatched);
             Assert.IsNotNull(doc);
+            docStorage.ReceivedWithAnyArgs().Add(Substitute.For<ITextEditorViewModel>());
+            orchestra.ReceivedWithAnyArgs().ShowDocument((ITextEditorViewModel)null);
         }
 
         [TestMethod]
@@ -71,10 +78,12 @@ namespace Orchestra.Modules.TextEditor.Test
             var textEditorService = dependncyHelper.CreateTextEditorServiceInstance();
 
             var configStorage = dependncyHelper.Resolve<IConfigurationsStorage>();
+            var docStorage = dependncyHelper.Resolve<IDocumentsStorage>();
             const string configName = "configName";
 
             configStorage.GetAll()
                          .Returns(x => new ITextEditorConfiguration[] { });
+            var orchestra = dependncyHelper.Resolve<IOrchestraService>();
 
             var exceptionCatched = false;
             IDocument doc = null;
@@ -92,24 +101,99 @@ namespace Orchestra.Modules.TextEditor.Test
             // Assert
             Assert.IsTrue(exceptionCatched);
             Assert.IsNull(doc);
+            docStorage.DidNotReceiveWithAnyArgs().Add(null);
+            orchestra.DidNotReceiveWithAnyArgs().ShowDocument((ITextEditorViewModel)null);
         }
 
         [TestMethod]
         public void CanGetActiveDocument()
         {
-            throw new System.NotImplementedException();
+            // Arrange
+            var dependncyHelper = new DependenciesHelper();
+            var textEditorService = dependncyHelper.CreateTextEditorServiceInstance();
+
+            var doc = Substitute.For<IDocument>();            
+            var id = Guid.NewGuid();
+            doc.Id.Returns(x => id);
+            var vm = Substitute.For<ITextEditorViewModel>();
+            vm.Document.Returns(doc);
+
+            var activeDoc = Substitute.For<IDocument>();
+            var activeId = Guid.NewGuid();
+            activeDoc.Id.Returns(x => activeId);
+            var activeVm = Substitute.For<ITextEditorViewModel>();
+            activeVm.Document.Returns(activeDoc);
+
+            var docStorage = dependncyHelper.Resolve<IDocumentsStorage>();
+            var orchestra = dependncyHelper.Resolve<IOrchestraService>();
+
+            docStorage.GetAll()
+                  .Returns(x => new[] { vm, activeVm });
+            orchestra.IsActive<ITextEditorViewModel>(doc)
+                     .ReturnsForAnyArgs(x => ((ITextEditorViewModel)x[0]).Document.Id.Equals(activeDoc.Id));
+
+            // Act
+            var detectedDoc = textEditorService.GetActiveDocument();
+
+            // Assert
+            Assert.IsNotNull(detectedDoc);
+            Assert.AreEqual(activeDoc.Id, detectedDoc.Id);
+            docStorage.Received().GetAll();
+            orchestra.ReceivedWithAnyArgs()
+                     .IsActive<ITextEditorViewModel>(null);
         }
 
         [TestMethod]
         public void CanRegisterHighlighting()
         {
-            throw new System.NotImplementedException();
+            // Arrange
+            var dependncyHelper = new DependenciesHelper();
+            var textEditorService = dependncyHelper.CreateTextEditorServiceInstance();
+            var catchedException = false;
+
+            // Act
+            try
+            {
+                textEditorService.RegisterHighlighting(Properties.Resources.Test, new [] {".ext"});
+            }
+            catch (Exception)
+            {
+                catchedException = true;
+            }
+
+            // Assert
+            Assert.IsFalse(catchedException);
         }
 
         [TestMethod]
         public void CanGetConfigurations()
         {
-            throw new System.NotImplementedException();
+            // Arrange
+            var dependncyHelper = new DependenciesHelper();
+            var textEditorService = dependncyHelper.CreateTextEditorServiceInstance();
+
+            var configStorage = dependncyHelper.Resolve<IConfigurationsStorage>();
+
+            // Act
+            var configurations = textEditorService.GetConfigurations();
+
+            // Assert
+            Assert.IsNotNull(configurations);
+            configStorage.Received().GetAll();
+        }
+
+        [TestMethod]
+        public void CanGetFileNamesManager()
+        {
+            // Arrange
+            var dependncyHelper = new DependenciesHelper();
+            var textEditorService = dependncyHelper.CreateTextEditorServiceInstance();
+
+            // Act
+            var fileNamesManager = textEditorService.FileNamesManager;
+
+            // Assert
+            Assert.IsNotNull(fileNamesManager);
         }
     }
 }

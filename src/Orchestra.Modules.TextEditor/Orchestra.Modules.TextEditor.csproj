@@ -122,9 +122,8 @@
     <Compile Include="Exceptions\TextEditorException.cs" />
     <Compile Include="Helpers\ConfigurationExtension.cs" />
     <Compile Include="Helpers\DocumentExtension.cs" />
-    <Compile Include="Helpers\FileNamesManager.cs" />
-    <Compile Include="Helpers\Interfaces\IFileNamesManager.cs" />
-    <Compile Include="Interfaces\ITextEditorModule.cs" />
+    <Compile Include="Services\FileNamesManager.cs" />
+    <Compile Include="Services\Interfaces\IFileNamesManager.cs" />
     <Compile Include="Models\CongigurationsStorage.cs" />
     <Compile Include="Models\Document.cs" />
     <Compile Include="Models\DocumentsStorage.cs" />
@@ -153,7 +152,9 @@
     </Compile>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Helpers\Interfaces\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Fody.targets" />
     <None Include="packages.config" />

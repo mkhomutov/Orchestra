@@ -9,6 +9,7 @@ namespace Orchestra.Modules.Julia
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using Catel.IoC;
     using Catel.MVVM;
     using Catel.Messaging;
@@ -88,8 +89,10 @@ namespace Orchestra.Modules.Julia
         {
             var textEditorService = DependencyResolverManager.Default.DefaultDependencyResolver.Resolve<ITextEditorService>();
 
+            textEditorService.RegisterHighlighting(Resources.JuliaLang, ".jl");
+            textEditorService.FileNamesManager.RegisterDefaultFileNameDefinition("NewFile", ".jl");
+
             textEditorService.Configure(ConfigurationName)
-                             .AddDefaultFileNameDefinition("NewFile", ".jl")
                              .Apply();
         }
 
@@ -98,9 +101,11 @@ namespace Orchestra.Modules.Julia
             var textEditorService = (ITextEditorService) ServiceLocator.Default.ResolveType(typeof (ITextEditorService));
             var documentService = (IDocumentService)ServiceLocator.Default.ResolveType(typeof(IDocumentService));
 
-            var document = textEditorService.CreateDocument(ConfigurationName);    
-            textEditorService.RegisterHighlighting(Properties.Resources.JuliaLang, ".jl");
-            documentService.GenerateAndApplyNewFileName(document, ".jl");
+            var document = textEditorService.CreateDocument(ConfigurationName);
+            var newFileName = textEditorService.FileNamesManager.GetNexDefaulFileName(".jl");
+            File.Create(newFileName).Dispose();
+            var file = new FileInfo(newFileName);
+            documentService.AttachFileToDocument(document, file);
         }
 
         private static bool CanCreateNew()
@@ -132,7 +137,7 @@ namespace Orchestra.Modules.Julia
 
             var textEditorService = DependencyResolverManager.Default.DefaultDependencyResolver.Resolve<ITextEditorService>();
             var activeDocument = textEditorService.GetActiveDocument();
-            return activeDocument != null && activeDocument.Saved && activeDocument.Changed;
+            return activeDocument != null && activeDocument.Changed;
         }
 
         private void OnSaveAs()
@@ -149,7 +154,7 @@ namespace Orchestra.Modules.Julia
 
             var textEditorService = (ITextEditorService)ServiceLocator.Default.ResolveType(typeof(ITextEditorService));
             var activeDocument = textEditorService.GetActiveDocument();
-            return activeDocument != null && (!activeDocument.Saved && !activeDocument.Changed);
+            return activeDocument != null && !activeDocument.Changed;
         }
 
         private static bool IsServiceRegistered<T>()

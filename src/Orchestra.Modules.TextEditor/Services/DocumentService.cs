@@ -7,6 +7,7 @@
 
 namespace Orchestra.Modules.TextEditor.Services
 {
+    using System.IO;
     using ICSharpCode.AvalonEdit.Highlighting;
     using Orchestra.Modules.TextEditor.Helpers;
     using Orchestra.Modules.TextEditor.Models;
@@ -15,19 +16,21 @@ namespace Orchestra.Modules.TextEditor.Services
 
     public class DocumentService : IDocumentService
     {
-        #region IDocumentService Members
-        public void GenerateAndApplyNewFileName(IDocument document, string fileExtension)
+        private readonly ITextEditorService _textEditorService;
+
+        public DocumentService(ITextEditorService textEditorService)
         {
-            ((Document)document).FileName = FileNamesManager.DefaultInstance.GetNexDefaulFileName(fileExtension);
-            ((Document)document).CurrentHighlighting = HighlightingManager.Instance.GetDefinitionByExtension(fileExtension);
+            _textEditorService = textEditorService;
+        }
+
+        #region IDocumentService Members
+        public void AttachFileToDocument(IDocument document, FileInfo fileInfo)
+        {
+            ((Document)document).FileInfo = fileInfo;
+            ((Document)document).CurrentHighlighting = HighlightingManager.Instance.GetDefinitionByExtension(fileInfo.Extension);
         }
 
         public void GetDocumentText(IDocument document)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void MarkAsSavedToFile(IDocument document, string fileName)
         {
             throw new System.NotImplementedException();
         }

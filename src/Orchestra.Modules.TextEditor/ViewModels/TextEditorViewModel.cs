@@ -29,7 +29,7 @@ namespace Orchestra.Modules.TextEditor.ViewModels
         #region Constructors
         public TextEditorViewModel()
         {
-            _documentFileNamePropertyName = ExpressionHelper.GetPropertyName(() => Document.FileName);
+            _documentFileNamePropertyName = ExpressionHelper.GetPropertyName(() => Document.FileInfo);
         }
         #endregion
 
@@ -52,7 +52,7 @@ namespace Orchestra.Modules.TextEditor.ViewModels
                         h => Document.PropertyChanged += h,
                         h => Document.PropertyChanged -= h)
                           .Where(x => x.PropertyName == _documentFileNamePropertyName)
-                          .Select(x => Document.FileName)
+                          .Select(x => Document.FileInfo.Name)
                           .Subscribe(SetTitle);
             }
         }

@@ -1,13 +1,11 @@
-﻿namespace Orchestra.Modules.TextEditor.Helpers
+﻿namespace Orchestra.Modules.TextEditor.Services
 {
     using System.Collections.Generic;
     using Orchestra.Modules.TextEditor.Exceptions;
+    using Orchestra.Modules.TextEditor.Services.Interfaces;
 
-    internal class FileNamesManager
+    internal class FileNamesManager : IFileNamesManager
     {
-        #region Constants
-        private static readonly FileNamesManager _defaultInstance = new FileNamesManager();
-        #endregion
 
         #region Fields
         private readonly IDictionary<string, int> _counters = new Dictionary<string, int>();
@@ -17,13 +15,6 @@
         #region Constructors
         public FileNamesManager()
         {
-        }
-        #endregion
-
-        #region Properties
-        public static FileNamesManager DefaultInstance
-        {
-            get { return _defaultInstance; }
         }
         #endregion
 

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Catel.IoC;
 using Orchestra.Modules.TextEditor;
-using Orchestra.Modules.TextEditor.Interfaces;
 using Orchestra.Modules.TextEditor.Models.Interfaces;
 using Orchestra.Modules.TextEditor.Services;
 using Orchestra.Modules.TextEditor.Services.Interfaces;
@@ -24,8 +23,7 @@ public static class ModuleInitializer
         //    ServiceLocator.Default.RegisterType(typeof(IDictionary<string, TextEditorConfiguration>), typeof(Dictionary<string, TextEditorConfiguration>));
 
         //   ServiceLocator.Default.RegisterType(typeof(IDictionary<,>), typeof(Dictionary<,>));
-        ServiceLocator.Default.RegisterType<ITextEditorModule, TextEditorModule>();
-        ServiceLocator.Default.RegisterType<ITextEditorService, TextEditorService>();
+   ServiceLocator.Default.RegisterType<ITextEditorService, TextEditorService>();
         ServiceLocator.Default.RegisterType<IDocumentService, DocumentService>();
     }
     #endregion

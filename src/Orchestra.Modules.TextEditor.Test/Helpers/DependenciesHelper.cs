@@ -8,7 +8,6 @@ namespace Orchestra.Modules.TextEditor.Test.Helpers
     using System.Collections.Generic;
     using Catel.IoC;
     using NSubstitute;
-    using Orchestra.Modules.TextEditor.Interfaces;
     using Orchestra.Modules.TextEditor.Models;
     using Orchestra.Modules.TextEditor.Models.Interfaces;
     using Orchestra.Modules.TextEditor.Services;
@@ -36,28 +35,25 @@ namespace Orchestra.Modules.TextEditor.Test.Helpers
             return this;
         }
 
-        public ITextEditorModule CreateTextEditorModuleInstance()
+        public void RegistrerSubstituteFor<T>() where T : class 
         {
-            var documents = Substitute.For<IDocumentsStorage>();
-            var configurations = Substitute.For<IConfigurationsStorage>();
-
-            RegisterInstance(Substitute.For<IRibbonService>());
-            RegisterInstance(documents);
-            RegisterInstance(configurations);
-
-            return CreateInstance<TextEditorModule>();
+            RegisterInstance(Substitute.For<T>());
         }
 
         public ITextEditorService CreateTextEditorServiceInstance()
         {
-            var orchestraService = Substitute.For<IOrchestraService>();
-            var module = CreateTextEditorModuleInstance();
-            RegisterInstance(module);
-            RegisterInstance(orchestraService);
+            RegistrerSubstituteFor<IOrchestraService>();
+            RegistrerSubstituteFor<IFileNamesManager>();
+            RegistrerSubstituteFor<IDocumentsStorage>();
+            RegistrerSubstituteFor<IConfigurationsStorage>();
 
             return CreateInstance<TextEditorService>();
         }
 
+        public IDocumentService CreateDocumentServiceInstance()
+        {
+            return CreateInstance<DocumentService>();
+        }
 
         public T CreateInstance<T>()
         {

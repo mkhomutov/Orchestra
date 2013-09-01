@@ -8,37 +8,30 @@
 namespace Orchestra.Modules.TextEditor
 {
     using Orchestra.Modules.TextEditor.Helpers;
-    using Orchestra.Modules.TextEditor.Interfaces;
     using Orchestra.Modules.TextEditor.Models;
     using Orchestra.Modules.TextEditor.Models.Interfaces;
+    using Orchestra.Modules.TextEditor.Services.Interfaces;
 
     public class TextEditorConfigurationBuilder
     {
         #region Fields
+        private readonly ITextEditorService _textEditorService;
         private readonly ITextEditorConfiguration _configuration;
-        private readonly ITextEditorModule _module;
         #endregion
 
         #region Constructors
-        public TextEditorConfigurationBuilder(ITextEditorModule module, ITextEditorConfiguration configuration, string configurationName)
+        public TextEditorConfigurationBuilder(ITextEditorService textEditorService, ITextEditorConfiguration configuration, string configurationName)
         {
-            _module = module;
+            _textEditorService = textEditorService;
             _configuration = configuration;
             _configuration.Name = configurationName;
         }
         #endregion
 
         #region Methods
-        public TextEditorConfigurationBuilder AddDefaultFileNameDefinition(string name, params string[] extensions)
-        {
-            FileNamesManager.DefaultInstance.RegisterDefaultFileNameDefinition(name, extensions);
-
-            return this;
-        }
-
         public void Apply()
         {
-            _module.ApplyConfiguration(_configuration);
+            _textEditorService.ApplyConfiguration(_configuration);
         }
         #endregion
     }

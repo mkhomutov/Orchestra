@@ -7,14 +7,14 @@
 
 namespace Orchestra.Modules.TextEditor.Services.Interfaces
 {
+    using System.IO;
     using Orchestra.Modules.TextEditor.Models.Interfaces;
 
     public interface IDocumentService
     {
         #region Methods
-        void GenerateAndApplyNewFileName(IDocument document, string fileExtension);
+        void AttachFileToDocument(IDocument document, FileInfo fileInfo);
         void GetDocumentText(IDocument document);
-        void MarkAsSavedToFile(IDocument document, string fileName);
         #endregion
     }
 }

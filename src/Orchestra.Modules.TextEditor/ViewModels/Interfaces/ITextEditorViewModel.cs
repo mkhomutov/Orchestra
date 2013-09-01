@@ -7,9 +7,10 @@
 
 namespace Orchestra.Modules.TextEditor.ViewModels.Interfaces
 {
+    using Catel.MVVM;
     using Orchestra.Modules.TextEditor.Models.Interfaces;
 
-    public interface ITextEditorViewModel
+    public interface ITextEditorViewModel : IViewModel
     {
         #region Properties
         IDocument Document { get; }

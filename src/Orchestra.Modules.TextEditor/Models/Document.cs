@@ -8,6 +8,7 @@
 namespace Orchestra.Modules.TextEditor.Models
 {
     using System;
+    using System.IO;
     using Catel.Data;
     using ICSharpCode.AvalonEdit.Highlighting;
     using Orchestra.Modules.TextEditor.Models.Interfaces;
@@ -26,9 +27,7 @@ namespace Orchestra.Modules.TextEditor.Models
         #endregion
 
         #region IDocument Members
-        public string FileName { get; set; }
-
-        public bool Saved { get; set; }
+        public FileInfo FileInfo { get; set; }
 
         public bool Changed { get; set; }
 

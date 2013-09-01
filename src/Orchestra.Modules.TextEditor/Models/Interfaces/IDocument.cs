@@ -7,15 +7,17 @@
 
 namespace Orchestra.Modules.TextEditor.Models.Interfaces
 {
+    using System;
     using System.ComponentModel;
+    using System.IO;
     using ICSharpCode.AvalonEdit.Highlighting;
 
     public interface IDocument : INotifyPropertyChanged, INotifyPropertyChanging
     {
         #region Properties
-        string FileName { get; }
+        Guid Id { get; }
 
-        bool Saved { get; }
+        FileInfo FileInfo { get; }
 
         bool Changed { get; }
 

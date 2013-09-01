@@ -5,12 +5,13 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 
-namespace Orchestra.Modules.TextEditor.Helpers.Interfaces
+namespace Orchestra.Modules.TextEditor.Services.Interfaces
 {
     public interface IFileNamesManager
     {
         #region Methods
         void RegisterDefaultFileNameDefinition(string name, params string[] extensions);
+        string GetNexDefaulFileName(string extension);
         #endregion
     }
 }
