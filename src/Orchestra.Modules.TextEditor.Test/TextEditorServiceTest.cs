@@ -181,19 +181,5 @@ namespace Orchestra.Modules.TextEditor.Test
             Assert.IsNotNull(configurations);
             configStorage.Received().GetAll();
         }
-
-        [TestMethod]
-        public void CanGetFileNamesManager()
-        {
-            // Arrange
-            var dependncyHelper = new DependenciesHelper();
-            var textEditorService = dependncyHelper.CreateTextEditorServiceInstance();
-
-            // Act
-            var fileNamesManager = textEditorService.FileNamesManager;
-
-            // Assert
-            Assert.IsNotNull(fileNamesManager);
-        }
     }
 }

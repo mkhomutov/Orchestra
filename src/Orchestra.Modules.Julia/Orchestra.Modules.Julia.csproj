@@ -83,6 +83,8 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\FileNamesManager.cs" />
+    <Compile Include="Helpers\Interfaces\IFileNamesManager.cs" />
     <Compile Include="JuliaModule.cs">
       <SubType>Code</SubType>
     </Compile>

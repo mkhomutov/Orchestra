@@ -11,6 +11,7 @@ namespace Orchestra.Modules.TextEditor.ViewModels
     using System.ComponentModel;
     using System.Reactive.Linq;
     using Catel;
+    using ICSharpCode.AvalonEdit.Document;
     using Orchestra.Modules.TextEditor.Models.Interfaces;
     using Orchestra.Modules.TextEditor.ViewModels.Interfaces;
     using Orchestra.ViewModels;
@@ -29,9 +30,12 @@ namespace Orchestra.Modules.TextEditor.ViewModels
         #region Constructors
         public TextEditorViewModel()
         {
-            _documentFileNamePropertyName = ExpressionHelper.GetPropertyName(() => Document.FileInfo);
+            _documentFileNamePropertyName = ExpressionHelper.GetPropertyName(() => Document.DocumentName);
+            TextDocument = new TextDocument();
         }
         #endregion
+
+        public TextDocument TextDocument { get; set; }
 
         #region ITextEditorViewModel Members
         public IDocument Document
@@ -52,9 +56,19 @@ namespace Orchestra.Modules.TextEditor.ViewModels
                         h => Document.PropertyChanged += h,
                         h => Document.PropertyChanged -= h)
                           .Where(x => x.PropertyName == _documentFileNamePropertyName)
-                          .Select(x => Document.FileInfo.Name)
+                          .Select(x => Document.DocumentName)
                           .Subscribe(SetTitle);
             }
+        }
+
+        public string GetText()
+        {
+            return TextDocument.Text;
+        }
+
+        public void SetText(string text)
+        {
+            TextDocument.Text = text;
         }
         #endregion
 

@@ -24,16 +24,14 @@ namespace Orchestra.Modules.TextEditor.Services
     {
         #region Fields
         private readonly IOrchestraService _orchestraService;
-        private readonly IFileNamesManager _fileNamesManager;
         private readonly IDocumentsStorage _documents;
         private readonly IConfigurationsStorage _configurations;
         #endregion
 
         #region Constructors
-        public TextEditorService(IOrchestraService orchestraService, IFileNamesManager fileNamesManager, IDocumentsStorage documents, IConfigurationsStorage configurations)
+        public TextEditorService(IOrchestraService orchestraService, IDocumentsStorage documents, IConfigurationsStorage configurations)
         {
             _orchestraService = orchestraService;
-            _fileNamesManager = fileNamesManager;
             _documents = documents;
             _configurations = configurations;
         }
@@ -52,12 +50,13 @@ namespace Orchestra.Modules.TextEditor.Services
                 throw new ConfigurationNotFoundException(configurationName);
             }
 
-            var viewModel = new TextEditorViewModel {Document = new Document {ConfigurationName = configurationName}};
-            _documents.Add(viewModel);
+            var doc = new Document {ConfigurationName = configurationName};
+            doc.ViewModel = new TextEditorViewModel { Document = doc };
+            _documents.Add(doc.ViewModel);
 
-            _orchestraService.ShowDocument(viewModel, viewModel.Document);
+            _orchestraService.ShowDocument(doc.ViewModel, doc);
 
-            return viewModel.Document;
+            return doc;
         }
 
         public IDocument GetActiveDocument()
@@ -105,13 +104,6 @@ namespace Orchestra.Modules.TextEditor.Services
                              .Select(x => x.Document);
         }
 
-        public IFileNamesManager FileNamesManager
-        {
-            get
-            {
-               return _fileNamesManager; 
-            }            
-        }
         #endregion
     }
 }

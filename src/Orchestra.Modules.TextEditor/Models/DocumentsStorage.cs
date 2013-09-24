@@ -9,20 +9,23 @@ namespace Orchestra.Modules.TextEditor.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Orchestra.Modules.TextEditor.Models.Interfaces;
     using Orchestra.Modules.TextEditor.ViewModels.Interfaces;
 
     public class DocumentsStorage : IDocumentsStorage
     {
+        private  IList<ITextEditorViewModel> _documents = new List<ITextEditorViewModel>();
+        
         #region IDocumentsStorage Members
         public void Add(ITextEditorViewModel documentViewModel)
         {
-            throw new NotImplementedException();
+            _documents.Add(documentViewModel);
         }
 
         public IEnumerable<ITextEditorViewModel> GetAll()
         {
-            throw new NotImplementedException();
+            return _documents.AsEnumerable();
         }
         #endregion
     }

@@ -13,8 +13,9 @@ namespace Orchestra.Modules.TextEditor.Services.Interfaces
     public interface IDocumentService
     {
         #region Methods
-        void AttachFileToDocument(IDocument document, FileInfo fileInfo);
-        void GetDocumentText(IDocument document);
+        void SetHighlighting(IDocument document, string fileExtension);
+        string GetDocumentText(IDocument document);
+        void SetDocumentText(IDocument document, string text);
         #endregion
     }
 }

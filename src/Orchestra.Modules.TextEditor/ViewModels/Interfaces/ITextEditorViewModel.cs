@@ -15,5 +15,8 @@ namespace Orchestra.Modules.TextEditor.ViewModels.Interfaces
         #region Properties
         IDocument Document { get; }
         #endregion
+
+        string GetText();
+        void SetText(string text);
     }
 }

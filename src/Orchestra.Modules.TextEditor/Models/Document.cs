@@ -12,6 +12,8 @@ namespace Orchestra.Modules.TextEditor.Models
     using Catel.Data;
     using ICSharpCode.AvalonEdit.Highlighting;
     using Orchestra.Modules.TextEditor.Models.Interfaces;
+    using Orchestra.Modules.TextEditor.ViewModels;
+    using Orchestra.Modules.TextEditor.ViewModels.Interfaces;
 
     internal class Document : ObservableObject, IDocument
     {
@@ -24,10 +26,12 @@ namespace Orchestra.Modules.TextEditor.Models
 
         #region Properties
         public Guid Id { get; private set; }
+
+        internal ITextEditorViewModel ViewModel { get; set; }
         #endregion
 
         #region IDocument Members
-        public FileInfo FileInfo { get; set; }
+        public string DocumentName { get; set; }
 
         public bool Changed { get; set; }
 

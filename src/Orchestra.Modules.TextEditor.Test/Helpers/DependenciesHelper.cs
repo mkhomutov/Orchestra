@@ -43,7 +43,6 @@ namespace Orchestra.Modules.TextEditor.Test.Helpers
         public ITextEditorService CreateTextEditorServiceInstance()
         {
             RegistrerSubstituteFor<IOrchestraService>();
-            RegistrerSubstituteFor<IFileNamesManager>();
             RegistrerSubstituteFor<IDocumentsStorage>();
             RegistrerSubstituteFor<IConfigurationsStorage>();
 

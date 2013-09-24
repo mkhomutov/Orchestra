@@ -8,6 +8,7 @@
 namespace Orchestra.Modules.TextEditor.Services
 {
     using System.IO;
+    using System.Linq;
     using ICSharpCode.AvalonEdit.Highlighting;
     using Orchestra.Modules.TextEditor.Helpers;
     using Orchestra.Modules.TextEditor.Models;
@@ -24,15 +25,19 @@ namespace Orchestra.Modules.TextEditor.Services
         }
 
         #region IDocumentService Members
-        public void AttachFileToDocument(IDocument document, FileInfo fileInfo)
+        public void SetHighlighting(IDocument document, string fileExtension)
         {
-            ((Document)document).FileInfo = fileInfo;
-            ((Document)document).CurrentHighlighting = HighlightingManager.Instance.GetDefinitionByExtension(fileInfo.Extension);
+            ((Document)document).CurrentHighlighting = HighlightingManager.Instance.GetDefinitionByExtension(fileExtension);
         }
 
-        public void GetDocumentText(IDocument document)
+        public string GetDocumentText(IDocument document)
         {
-            throw new System.NotImplementedException();
+            return ((Document)document).ViewModel.GetText();
+        }
+
+        public void SetDocumentText(IDocument document, string text)
+        {
+            ((Document) document).ViewModel.SetText(text);
         }
         #endregion
     }

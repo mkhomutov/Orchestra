@@ -37,7 +37,6 @@ namespace Orchestra.Modules.TextEditor.Services.Interfaces
 
         IEnumerable<IDocument> GetDocuments();
 
-        IFileNamesManager FileNamesManager { get; }
         #endregion
     }
 }

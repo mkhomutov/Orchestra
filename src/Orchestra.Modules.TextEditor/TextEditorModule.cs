@@ -9,8 +9,11 @@ namespace Orchestra.Modules.TextEditor
 {
     using System.Collections.Generic;
     using System.Linq;
+    using Catel.IoC;
     using Orchestra.Modules.TextEditor.Models;
     using Orchestra.Modules.TextEditor.Models.Interfaces;
+    using Orchestra.Modules.TextEditor.Services;
+    using Orchestra.Modules.TextEditor.Services.Interfaces;
     using Orchestra.Modules.TextEditor.ViewModels.Interfaces;
     using Orchestra.Services;
 
@@ -26,6 +29,10 @@ namespace Orchestra.Modules.TextEditor
         public TextEditorModule(IRibbonService ribbonService)
             : base("TextEditorModule", ribbonService)
         {
+            ServiceLocator.Default.RegisterType(typeof(IConfigurationsStorage), typeof(ConfigurationsStorage));
+            ServiceLocator.Default.RegisterType(typeof(IDocumentsStorage), typeof(DocumentsStorage));
+            ServiceLocator.Default.RegisterType<ITextEditorService, TextEditorService>();
+            ServiceLocator.Default.RegisterType<IDocumentService, DocumentService>();
         }
         #endregion
     }

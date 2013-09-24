@@ -5,7 +5,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 
-namespace Orchestra.Modules.TextEditor.Services.Interfaces
+namespace Orchestra.Modules.TextEditor.Helpers.Interfaces
 {
     public interface IFileNamesManager
     {

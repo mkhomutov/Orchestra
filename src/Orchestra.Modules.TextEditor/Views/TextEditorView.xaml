@@ -10,7 +10,8 @@
                         d:DesignWidth="300">
     <DockPanel LastChildFill="True">
         <avalonEdit:TextEditor x:Name="editor"
-                               SyntaxHighlighting="{Binding Document.CurrentHighlighting}">
+                               SyntaxHighlighting="{Binding Document.CurrentHighlighting}"
+                               Document="{Binding TextDocument}">
 
         </avalonEdit:TextEditor>
     </DockPanel>

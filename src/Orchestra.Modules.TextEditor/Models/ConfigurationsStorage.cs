@@ -9,29 +9,36 @@ namespace Orchestra.Modules.TextEditor.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Orchestra.Modules.TextEditor.Models.Interfaces;
 
-    public class CongigurationsStorage : IConfigurationsStorage
+    public class ConfigurationsStorage : IConfigurationsStorage
     {
+        private IList<ITextEditorConfiguration> _configList = new List<ITextEditorConfiguration>();
         #region IConfigurationsStorage Members
         public void Add(ITextEditorConfiguration configuration)
         {
-            throw new NotImplementedException();
+            _configList.Add(configuration);
         }
 
         public bool Existed(ITextEditorConfiguration configuration)
         {
-            throw new NotImplementedException();
+            return _configList.Any(x => x.Name == configuration.Name);
         }
 
         public void Replace(ITextEditorConfiguration configuration)
         {
-            throw new NotImplementedException();
+            var toRemove = _configList.FirstOrDefault(x => x.Name == configuration.Name);
+            if (toRemove != null)
+            {
+                _configList.Remove(toRemove);
+                _configList.Add(configuration);
+            }
         }
 
         public IEnumerable<ITextEditorConfiguration> GetAll()
         {
-            throw new NotImplementedException();
+            return _configList.AsEnumerable();
         }
         #endregion
     }

@@ -17,7 +17,7 @@ namespace Orchestra.Modules.TextEditor.Models.Interfaces
         #region Properties
         Guid Id { get; }
 
-        FileInfo FileInfo { get; }
+        string DocumentName { get; }
 
         bool Changed { get; }
 

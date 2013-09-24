@@ -18,6 +18,8 @@ namespace Orchestra.Modules.Julia
     using Orchestra.Modules.Julia.Properties;
     using Orchestra.Modules.Julia.ViewModels;
     using Orchestra.Modules.Julia.Views.Interfaces;
+    using Orchestra.Modules.TextEditor.Helpers;
+    using Orchestra.Modules.TextEditor.Helpers.Interfaces;
     using Orchestra.Modules.TextEditor.Models;
     using Orchestra.Modules.TextEditor.Services.Interfaces;
     using Orchestra.Modules.TextEditor.ViewModels.Interfaces;
@@ -40,6 +42,7 @@ namespace Orchestra.Modules.Julia
         public JuliaModule(IRibbonService ribbonService)
             : base("JuliaModule", ribbonService)
         {
+            ServiceLocator.Default.RegisterInstance(typeof(IFileNamesManager), new FileNamesManager());
             MessageMediator.Default.Register<ModuleInitialized>(this, OnModuleInitialized);
         }
         #endregion
@@ -90,7 +93,8 @@ namespace Orchestra.Modules.Julia
             var textEditorService = DependencyResolverManager.Default.DefaultDependencyResolver.Resolve<ITextEditorService>();
 
             textEditorService.RegisterHighlighting(Resources.JuliaLang, ".jl");
-            textEditorService.FileNamesManager.RegisterDefaultFileNameDefinition("NewFile", ".jl");
+            var fileNamesManager = (IFileNamesManager)ServiceLocator.Default.ResolveType(typeof(IFileNamesManager));
+            fileNamesManager.RegisterDefaultFileNameDefinition("NewFile", ".jl");
 
             textEditorService.Configure(ConfigurationName)
                              .Apply();
@@ -100,12 +104,13 @@ namespace Orchestra.Modules.Julia
         {
             var textEditorService = (ITextEditorService) ServiceLocator.Default.ResolveType(typeof (ITextEditorService));
             var documentService = (IDocumentService)ServiceLocator.Default.ResolveType(typeof(IDocumentService));
+            var fileNamesManager = (IFileNamesManager)ServiceLocator.Default.ResolveType(typeof(IFileNamesManager));
 
             var document = textEditorService.CreateDocument(ConfigurationName);
-            var newFileName = textEditorService.FileNamesManager.GetNexDefaulFileName(".jl");
+            var newFileName = fileNamesManager.GetNexDefaulFileName(".jl");
             File.Create(newFileName).Dispose();
             var file = new FileInfo(newFileName);
-            documentService.AttachFileToDocument(document, file);
+            documentService.SetHighlighting(document, file.Extension);
         }
 
         private static bool CanCreateNew()
