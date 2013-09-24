@@ -1,8 +1,8 @@
-﻿namespace Orchestra.Modules.TextEditor.Helpers
+﻿namespace Orchestra.Modules.Julia.Helpers
 {
     using System.Collections.Generic;
+    using Orchestra.Modules.Julia.Helpers.Interfaces;
     using Orchestra.Modules.TextEditor.Exceptions;
-    using Orchestra.Modules.TextEditor.Helpers.Interfaces;
 
     internal class FileNamesManager : IFileNamesManager
     {

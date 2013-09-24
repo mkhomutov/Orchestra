@@ -15,11 +15,12 @@ namespace Orchestra.Modules.Julia
     using Catel.Messaging;
     using Orchestra.Messages;
     using Orchestra.Models;
+    using Orchestra.Modules.Julia.Helpers;
+    using Orchestra.Modules.Julia.Helpers.Interfaces;
     using Orchestra.Modules.Julia.Properties;
     using Orchestra.Modules.Julia.ViewModels;
     using Orchestra.Modules.Julia.Views.Interfaces;
     using Orchestra.Modules.TextEditor.Helpers;
-    using Orchestra.Modules.TextEditor.Helpers.Interfaces;
     using Orchestra.Modules.TextEditor.Models;
     using Orchestra.Modules.TextEditor.Services.Interfaces;
     using Orchestra.Modules.TextEditor.ViewModels.Interfaces;
