@@ -14,29 +14,29 @@ namespace Orchestra.Modules.TextEditor.Models
 
     public class ConfigurationsStorage : IConfigurationsStorage
     {
-        private IList<ITextEditorConfiguration> _configList = new List<ITextEditorConfiguration>();
+        private IList<TextEditorConfiguration> _configList = new List<TextEditorConfiguration>();
         #region IConfigurationsStorage Members
-        public void Add(ITextEditorConfiguration configuration)
+        public void Add(TextEditorConfiguration configuration)
         {
             _configList.Add(configuration);
         }
 
-        public bool Existed(ITextEditorConfiguration configuration)
+        public bool Existed(string configurationName)
         {
-            return _configList.Any(x => x.Name == configuration.Name);
+            return _configList.Any(x => x.Name == configurationName);
         }
 
-        public void Replace(ITextEditorConfiguration configuration)
+        public void Replace(TextEditorConfiguration configuration)
         {
             var toRemove = _configList.FirstOrDefault(x => x.Name == configuration.Name);
-            if (toRemove != null)
+            if (!toRemove.Equals(default(TextEditorConfiguration)))
             {
                 _configList.Remove(toRemove);
                 _configList.Add(configuration);
             }
         }
 
-        public IEnumerable<ITextEditorConfiguration> GetAll()
+        public IEnumerable<TextEditorConfiguration> GetAll()
         {
             return _configList.AsEnumerable();
         }

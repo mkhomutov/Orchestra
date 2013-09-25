@@ -31,9 +31,9 @@ namespace Orchestra.Modules.TextEditor.Services.Interfaces
 
         void RegisterHighlighting(string schema, params string[] extensions);
 
-        IEnumerable<ITextEditorConfiguration> GetConfigurations();
+        IEnumerable<TextEditorConfiguration> GetConfigurations();
 
-        void ApplyConfiguration(ITextEditorConfiguration configuration);
+        void ApplyConfiguration(TextEditorConfiguration configuration);
 
         IEnumerable<IDocument> GetDocuments();
 

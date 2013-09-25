@@ -44,7 +44,7 @@ namespace Orchestra.Modules.TextEditor.Test
             var docStorage = dependncyHelper.Resolve<IDocumentsStorage>();
             var orchestra = dependncyHelper.Resolve<IOrchestraService>();
 
-            var configuration = Substitute.For<ITextEditorConfiguration>();
+            var configuration = Substitute.For<TextEditorConfiguration>();
             configuration.Name.Returns(configName);
 
             configStorage.GetAll()
@@ -82,7 +82,7 @@ namespace Orchestra.Modules.TextEditor.Test
             const string configName = "configName";
 
             configStorage.GetAll()
-                         .Returns(x => new ITextEditorConfiguration[] { });
+                         .Returns(x => new TextEditorConfiguration[] { });
             var orchestra = dependncyHelper.Resolve<IOrchestraService>();
 
             var exceptionCatched = false;

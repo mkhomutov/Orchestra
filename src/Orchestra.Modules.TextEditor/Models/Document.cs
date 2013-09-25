@@ -33,7 +33,7 @@ namespace Orchestra.Modules.TextEditor.Models
         #region IDocument Members
         public string DocumentName { get; set; }
 
-        public bool Changed { get; set; }
+        public bool Changed { get; set; }        
 
         public string ConfigurationName { get; set; }
 

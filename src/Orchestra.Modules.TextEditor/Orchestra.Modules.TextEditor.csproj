@@ -115,9 +115,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\ConfigurationNotFoundException.cs" />
-    <Compile Include="Exceptions\DefaultFileNameDefinitionDuplicatedExtension.cs" />
-    <Compile Include="Exceptions\DefaultFileNameDefinitionNotFoundExtension.cs" />
-    <Compile Include="Exceptions\HighlightingDefinitionDuplicatedException.cs" />
     <Compile Include="Exceptions\TextEditorConfigurationException.cs" />
     <Compile Include="Exceptions\TextEditorException.cs" />
     <Compile Include="Helpers\ConfigurationExtension.cs" />

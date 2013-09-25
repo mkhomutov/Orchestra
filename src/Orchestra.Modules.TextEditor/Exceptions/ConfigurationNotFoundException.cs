@@ -9,7 +9,7 @@ namespace Orchestra.Modules.TextEditor.Exceptions
     using System.Runtime.Serialization;
 
     [Serializable]
-    public class ConfigurationNotFoundException : TextEditorException
+    public class ConfigurationNotFoundException : TextEditorConfigurationException
     {
         public ConfigurationNotFoundException(string configurationName)
             : base(string.Format("The configuration of TextEditor with name {0} was not registered yet.", configurationName))

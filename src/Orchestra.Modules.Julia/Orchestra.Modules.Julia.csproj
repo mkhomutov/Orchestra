@@ -83,6 +83,9 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\DefaultFileNameDefinitionDuplicatedExtension.cs" />
+    <Compile Include="Exceptions\DefaultFileNameDefinitionNotFoundExtension.cs" />
+    <Compile Include="Exceptions\JuliaException.cs" />
     <Compile Include="Helpers\FileNamesManager.cs" />
     <Compile Include="Helpers\Interfaces\IFileNamesManager.cs" />
     <Compile Include="JuliaModule.cs">

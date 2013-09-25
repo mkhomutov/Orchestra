@@ -5,8 +5,37 @@
 // --------------------------------------------------------------------------------------------------------------------
 namespace Orchestra.Modules.TextEditor.Models.Interfaces
 {
-    public interface ITextEditorConfiguration
+    using System.Windows;
+    using System.Windows.Media;
+
+/*    public interface ITextEditorConfiguration
     {
         string Name { get; set; }
-    }
+
+        bool WrapWords { get; set; }
+
+        bool ShowLinesNumber { get; set; }
+
+        int TabWidth { get; set; }
+
+        int IndentSize { get; set; }
+
+        bool ConvertTabToSpace { get; set; }
+
+        bool ShowSpaces { get; set; }
+
+        bool ShowTabs { get; set; }
+
+        bool ShowEndOfLine { get; set; }
+
+        FontStretch FontStretch { get; set; }
+
+        double FontSize { get; set; }
+
+        FontFamily FontFamily { get; set; }
+
+        FontStyle FontStyle { get; set; }
+
+        FontWeight FontWeight { get; set; }
+    }*/
 }

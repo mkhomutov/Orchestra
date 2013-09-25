@@ -20,8 +20,8 @@ namespace Orchestra.Modules.TextEditor.Views
         /// Initializes a new instance of the <see cref="TextEditorView" /> class.
         /// </summary>
         public TextEditorView()
-        {
-            InitializeComponent();            
+        {            
+            InitializeComponent();   
         }
         #endregion
     }

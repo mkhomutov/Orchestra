@@ -5,9 +5,10 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 
-namespace Orchestra.Modules.TextEditor.Exceptions
+namespace Orchestra.Modules.Julia.Exceptions
 {
-    public class DefaultFileNameDefinitionNotFoundExtension : TextEditorConfigurationException
+
+    public class DefaultFileNameDefinitionNotFoundExtension : JuliaException
     {
         #region Constructors
         public DefaultFileNameDefinitionNotFoundExtension(string fileExtension, string configurationName)

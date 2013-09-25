@@ -1,6 +1,8 @@
 ﻿namespace Orchestra.Modules.Julia.Helpers
 {
     using System.Collections.Generic;
+
+    using Orchestra.Modules.Julia.Exceptions;
     using Orchestra.Modules.Julia.Helpers.Interfaces;
     using Orchestra.Modules.TextEditor.Exceptions;
 

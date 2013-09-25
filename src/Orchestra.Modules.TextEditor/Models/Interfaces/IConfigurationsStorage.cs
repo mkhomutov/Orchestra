@@ -12,10 +12,10 @@ namespace Orchestra.Modules.TextEditor.Models.Interfaces
     public interface IConfigurationsStorage
     {
         #region Methods
-        void Add(ITextEditorConfiguration configuration);
-        bool Existed(ITextEditorConfiguration configuration);
-        void Replace(ITextEditorConfiguration configuration);
-        IEnumerable<ITextEditorConfiguration> GetAll();
+        void Add(TextEditorConfiguration configuration);
+        bool Existed(string configurationName);
+        void Replace(TextEditorConfiguration configuration);
+        IEnumerable<TextEditorConfiguration> GetAll();
         #endregion
     }
 }

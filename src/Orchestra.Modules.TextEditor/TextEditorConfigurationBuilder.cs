@@ -16,11 +16,11 @@ namespace Orchestra.Modules.TextEditor
     {
         #region Fields
         private readonly ITextEditorService _textEditorService;
-        private readonly ITextEditorConfiguration _configuration;
+        private readonly TextEditorConfiguration _configuration;
         #endregion
 
         #region Constructors
-        public TextEditorConfigurationBuilder(ITextEditorService textEditorService, ITextEditorConfiguration configuration, string configurationName)
+        public TextEditorConfigurationBuilder(ITextEditorService textEditorService, TextEditorConfiguration configuration, string configurationName)
         {
             _textEditorService = textEditorService;
             _configuration = configuration;

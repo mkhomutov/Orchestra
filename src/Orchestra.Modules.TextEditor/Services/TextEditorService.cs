@@ -81,14 +81,14 @@ namespace Orchestra.Modules.TextEditor.Services
             }
         }
 
-        public IEnumerable<ITextEditorConfiguration> GetConfigurations()
+        public IEnumerable<TextEditorConfiguration> GetConfigurations()
         {
             return _configurations.GetAll();
         }
 
-        public void ApplyConfiguration(ITextEditorConfiguration configuration)
+        public void ApplyConfiguration(TextEditorConfiguration configuration)
         {
-            if (_configurations.Existed(configuration))
+            if (_configurations.Existed(configuration.Name))
             {
                 _configurations.Replace(configuration);
             }
