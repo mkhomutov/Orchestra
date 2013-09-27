@@ -1,0 +1,6 @@
+﻿<?xml version="1.0"?>
+<SyntaxDefinition name="TestDefinition" extensions=".ext" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+  <RuleSet>
+    
+  </RuleSet>
+</SyntaxDefinition>
