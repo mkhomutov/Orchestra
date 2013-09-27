@@ -82,6 +82,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orchestra.Modules.TextEdito
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orchestra.Modules.TextEditor.Test", "Orchestra.Modules.TextEditor.Test\Orchestra.Modules.TextEditor.Test.csproj", "{0E519BD9-1111-4E37-9772-D60C63450C3E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orchestra.Modules.TextEditor.TestShell", "Orchestra.Modules.TextEditor.TestShell\Orchestra.Modules.TextEditor.TestShell.csproj", "{D0FB2C68-D636-4ADB-9B37-409F20930554}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orchestra.Modules.TextEditor.TestShell.Menu", "Orchestra.Modules.TextEditor.TestShell.Menu\Orchestra.Modules.TextEditor.TestShell.Menu.csproj", "{666CE408-3E8B-49D7-A2B9-EB44B9985B63}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -148,6 +152,14 @@ Global
 		{0E519BD9-1111-4E37-9772-D60C63450C3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E519BD9-1111-4E37-9772-D60C63450C3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E519BD9-1111-4E37-9772-D60C63450C3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0FB2C68-D636-4ADB-9B37-409F20930554}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0FB2C68-D636-4ADB-9B37-409F20930554}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0FB2C68-D636-4ADB-9B37-409F20930554}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0FB2C68-D636-4ADB-9B37-409F20930554}.Release|Any CPU.Build.0 = Release|Any CPU
+		{666CE408-3E8B-49D7-A2B9-EB44B9985B63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{666CE408-3E8B-49D7-A2B9-EB44B9985B63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{666CE408-3E8B-49D7-A2B9-EB44B9985B63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{666CE408-3E8B-49D7-A2B9-EB44B9985B63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -176,5 +188,7 @@ Global
 		{8CFBB8B0-88CD-43C6-8CB2-0BB296D028A6} = {B2B674FE-3C9F-41C2-88D0-CA0BA5AF12E5}
 		{ECE04681-F8DC-4F4E-B1B4-9FC0C9F9274B} = {8CFBB8B0-88CD-43C6-8CB2-0BB296D028A6}
 		{0E519BD9-1111-4E37-9772-D60C63450C3E} = {8CFBB8B0-88CD-43C6-8CB2-0BB296D028A6}
+		{D0FB2C68-D636-4ADB-9B37-409F20930554} = {8CFBB8B0-88CD-43C6-8CB2-0BB296D028A6}
+		{666CE408-3E8B-49D7-A2B9-EB44B9985B63} = {8CFBB8B0-88CD-43C6-8CB2-0BB296D028A6}
 	EndGlobalSection
 EndGlobal
