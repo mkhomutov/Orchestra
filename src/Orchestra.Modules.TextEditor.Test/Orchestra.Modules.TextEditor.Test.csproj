@@ -82,7 +82,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Orchestra.Library.NET40\Orchestra.Library.NET40.csproj">
       <Project>{433bce8b-95ae-4628-abed-86a224d5e8c9}</Project>
-      <Name>Orchestra.Library</Name>
+      <Name>Orchestra.Library.NET40</Name>
     </ProjectReference>
     <ProjectReference Include="..\Orchestra.Modules.TextEditor\Orchestra.Modules.TextEditor.csproj">
       <Project>{ece04681-f8dc-4f4e-b1b4-9fc0c9f9274b}</Project>

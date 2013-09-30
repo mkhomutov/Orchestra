@@ -8,8 +8,8 @@
     <ProjectGuid>{666CE408-3E8B-49D7-A2B9-EB44B9985B63}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Orchestra.Modules.TextEditor.TestShell.Menu</RootNamespace>
-    <AssemblyName>Orchestra.Modules.TextEditor.TestShell.Menu</AssemblyName>
+    <RootNamespace>Orchestra.Modules.NoteTaker</RootNamespace>
+    <AssemblyName>Orchestra.Modules.NoteTaker</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <WarningLevel>4</WarningLevel>
@@ -18,13 +18,14 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\..\output\Debug\TextEditor\Modules\</OutputPath>
+    <OutputPath>..\..\output\Debug\NoteTaker.TestShell\Modules\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <DocumentationFile>..\..\output\Debug\NoteTaker.TestShell\Modules\Orchestra.Modules.NoteTaker.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <OutputPath>..\..\output\Release\Modules\</OutputPath>
@@ -38,6 +39,9 @@
     <Reference Include="Catel.Core, Version=3.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Catel.Core.3.6.1309252011-beta\lib\net40\Catel.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Catel.Extensions.Controls">
+      <HintPath>..\..\lib\Catel.Extensions.Controls.3.6.1309252011-beta\lib\net40\Catel.Extensions.Controls.dll</HintPath>
     </Reference>
     <Reference Include="Catel.Extensions.Prism, Version=3.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -79,7 +83,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Module.cs">
+    <Compile Include="NoteTakerModule.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

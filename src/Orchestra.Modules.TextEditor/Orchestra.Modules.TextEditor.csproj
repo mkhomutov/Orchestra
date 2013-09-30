@@ -18,14 +18,14 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\..\output\Debug\TextEditor\Modules\</OutputPath>
+    <OutputPath>..\..\output\Debug\Modules\TextEditor\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
-    <DocumentationFile>..\..\output\Debug\TextEditor\Modules\Orchestra.Modules.TextEditor.xml</DocumentationFile>
+    <DocumentationFile>..\..\output\Debug\Modules\TextEditor\Orchestra.Modules.TextEditor.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <OutputPath>..\..\output\Release\Modules\</OutputPath>
@@ -154,7 +154,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Orchestra.Library.NET40\Orchestra.Library.NET40.csproj">
       <Project>{433bce8b-95ae-4628-abed-86a224d5e8c9}</Project>
-      <Name>Orchestra.Library</Name>
+      <Name>Orchestra.Library.NET40</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -1,16 +1,12 @@
-﻿namespace Orchestra.Modules.TextEditor.TestShell
+﻿namespace Orchestra.Modules.NoteTaker.TestShell
 {
-    using System;
     using System.Windows;
 
-    using Catel;
     using Catel.IoC;
     using Catel.MVVM;
-    using Catel.MVVM.ViewModels;
     using Catel.Windows;
 
     using Orchestra;
-    using Orchestra.Services;
     using Orchestra.ViewModels;
 
     /// <summary>
